@@ -1,1 +1,36 @@
+# Aha OTT Prometheus Configuration
 
+- job_name: 'aha_ott_http_probe'
+  metrics_path: /probe
+  params:
+    module: [http_2xx]  # Look for a HTTP 200 response.
+  static_configs:
+    - targets:
+        - http://IP:3000  # Target for the Aha OTT HTTP application.
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 13.232.214.2:9115  # The blackbox exporter's real hostname.
+
+- job_name: 'aha_ott_metrics'
+  static_configs:
+    - targets:
+        - 'IP:9100'  # Node Exporter to gather system metrics (CPU, memory, disk).
+  
+- job_name: 'aha_ott_kubernetes'
+  kubernetes_sd_configs:
+    - role: pod
+  relabel_configs:
+    - source_labels: [__meta_kubernetes_pod_name]
+      target_label: pod
+    - source_labels: [__meta_kubernetes_namespace]
+      target_label: namespace
+    - source_labels: [__meta_kubernetes_pod_label_app]
+      target_label: app
+    - source_labels: [__meta_kubernetes_pod_label_version]
+      target_label: version
+  metrics_path: /metrics
+  scheme: http
