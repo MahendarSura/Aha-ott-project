@@ -1,53 +1,60 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-// Importing Components and Pages
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Gift from './pages/Gift';
-import Order from './pages/Order';
-import Pay from './pages/Pay';
-import Store from './pages/Store';
-import Search from './pages/Search';
+// Lazy loading components
+const Header = React.lazy(() => import('./components/Header'));
+const Footer = React.lazy(() => import('./components/Footer'));
+const Home = React.lazy(() => import('./pages/Home'));
+const Gift = React.lazy(() => import('./pages/Gift'));
+const Order = React.lazy(() => import('./pages/Order'));
+const Pay = React.lazy(() => import('./pages/Pay'));
+const Store = React.lazy(() => import('./pages/Store'));
+const Search = React.lazy(() => import('./pages/Search'));
 
 // App Component
 function App() {
   return (
     <BrowserRouter>
-      {/* Header Section */}
-      <Header />
+      {/* Lazy load Header */}
+      <Suspense fallback={<div>Loading Header...</div>}>
+        <Header />
+      </Suspense>
 
       {/* Main Routes */}
-      <Routes>
-        {/* Redirect from / to /dashboard */}
-        <Route exact path="/" element={<Navigate replace to="/dashboard" />} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {/* Redirect from / to /dashboard */}
+          <Route path="/" element={<Navigate replace to="/dashboard" />} />
 
-        {/* Dashboard/Home Route */}
-        <Route path="/dashboard" element={<Home />} />
+          {/* Dashboard/Home Route */}
+          <Route path="/dashboard" element={<Home />} />
 
-        {/* Gift Cards Route */}
-        <Route path="/giftcards" element={<Gift />} />
+          {/* Gift Cards Route */}
+          <Route path="/giftcards" element={<Gift />} />
 
-        {/* Ordering Route */}
-        <Route path="/ordering" element={<Order />} />
+          {/* Ordering Route */}
+          <Route path="/ordering" element={<Order />} />
 
-        {/* Payment Route */}
-        <Route path="/pay" element={<Pay />} />
+          {/* Payment Route */}
+          <Route path="/pay" element={<Pay />} />
 
-        {/* Store Route */}
-        <Route path="/store" element={<Store />} />
+          {/* Store Route */}
+          <Route path="/store" element={<Store />} />
 
-        {/* Search Route */}
-        <Route path="/search" element={<Search />} />
-      </Routes>
+          {/* Search Route */}
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </Suspense>
 
-      {/* Footer Section */}
-      <Footer />
+      {/* Lazy load Footer */}
+      <Suspense fallback={<div>Loading Footer...</div>}>
+        <Footer />
+      </Suspense>
     </BrowserRouter>
   );
 }
 
 export default App;
+
 
