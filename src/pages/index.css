@@ -1,1 +1,124 @@
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Body and General Styles */
+body {
+  margin: 0;
+  font-family: SoDoSans_Light, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #edebe9; /* Light gray background */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Custom Fonts (SoDoSans) */
+@font-face {
+  font-family: SoDoSans_Black;
+  src: url(./assets/font/SoDoSans-Black.woff2) format("woff2"),
+       url(./assets/font/SoDoSans-Black.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: SoDoSans_Bold;
+  src: url(./assets/font/SoDoSans-Bold.woff2) format("woff2"),
+       url(./assets/font/SoDoSans-Bold.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: SoDoSans_Light;
+  src: url(./assets/font/SoDoSans-Light.woff2) format("woff2"),
+       url(./assets/font/SoDoSans-Light.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: SoDoSans_Regular;
+  src: url(./assets/font/SoDoSans-Regular.woff2) format("woff2"),
+       url(./assets/font/SoDoSans-Regular.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: SoDoSans_Semibold;
+  src: url(./assets/font/SoDoSans-SemiBold.woff2) format("woff2"),
+       url(./assets/font/SoDoSans-SemiBold.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CSS Variables for Global Themes */
+:root {
+  --bg-green-500: #00754a; /* Custom green background color */
+}
+
+/* Swiper Button Styling */
+.swiper-button {
+  position: absolute;
+  top: 30px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.swiper-button svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Swiper Button for Barista Section */
+.image-swiper-button-prev {
+  top: 55px;
+  left: -20px;
+}
+
+.image-swiper-button-next {
+  top: 55px;
+  right: -20px;
+}
+
+.swiper-button-disabled {
+  opacity: 0.5;
+}
+
+/* Swiper Button for Banner Section */
+.swiper-button-banner {
+  position: absolute;
+  top: 30px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.swiper-button-banner svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.image-swiper-button-prev-banner {
+  top: 85px;
+  left: -12px;
+}
+
+.image-swiper-button-next-banner {
+  top: 85px;
+  right: -12px;
+}
+
+.swiper-button-disabled {
+  opacity: 0.5;
+}
 
