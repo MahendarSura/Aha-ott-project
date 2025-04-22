@@ -1,1 +1,102 @@
+pipeline {
+    agent any
+
+    environment {
+        // AWS Credentials from Jenkins Credentials Store
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_REGION            = 'us-east-1'  // Change to your preferred AWS region
+    }
+
+    parameters {
+        // Parameter to control the action (e.g., deploy or destroy)
+        string(name: 'action', defaultValue: 'deploy', description: 'Action to perform: deploy or destroy')
+    }
+
+    stages {
+        stage('Checkout from Git') {
+            steps {
+                // Checkout code from the AHA OTT GitHub repository
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/Aseemakram19/aha-ott.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                // Install necessary dependencies for AHA OTT
+                sh 'npm install'  // Assuming you're using Node.js for frontend or backend
+            }
+        }
+
+        stage('Build AHA OTT Application') {
+            steps {
+                // Run the build step for AHA OTT (e.g., React build)
+                sh 'npm run build'
+            }
+        }
+
+        stage('AWS Deployment (Terraform or CloudFormation)') {
+            steps {
+                dir('infrastructure') {  // Assuming Terraform or CloudFormation files are inside the infrastructure folder
+                    script {
+                        // Initialize Terraform or deploy CloudFormation stack
+                        sh '''
+                        terraform init \
+                        -backend-config="access_key=$AWS_ACCESS_KEY_ID" \
+                        -backend-config="secret_key=$AWS_SECRET_ACCESS_KEY" \
+                        -backend-config="region=$AWS_REGION"
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                dir('infrastructure') {
+                    // Validate and plan the Terraform deployment
+                    sh '''
+                    terraform plan \
+                    -var="access_key=$AWS_ACCESS_KEY_ID" \
+                    -var="secret_key=$AWS_SECRET_ACCESS_KEY" \
+                    -var="region=$AWS_REGION"
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy AHA OTT to AWS') {
+            steps {
+                dir('infrastructure') {
+                    // Perform the deploy or destroy action depending on the pipeline parameter
+                    sh '''
+                    terraform ${action} --auto-approve \
+                    -var="access_key=$AWS_ACCESS_KEY_ID" \
+                    -var="secret_key=$AWS_SECRET_ACCESS_KEY" \
+                    -var="region=$AWS_REGION"
+                    '''
+                }
+            }
+        }
+
+        stage('Test Deployment') {
+            steps {
+                // Run post-deployment tests (e.g., integration tests)
+                echo "Running post-deployment tests..."
+                sh './scripts/test_deployment.sh'  // Assuming you have a script to test the deployment
+            }
+        }
+    }
+
+    post {
+        success {
+            // Post success steps
+            echo '✅ AHA OTT deployment completed successfully!'
+        }
+        failure {
+            // Post failure steps
+            echo '❌ AHA OTT deployment failed! Check the logs.'
+        }
+    }
+}
 
