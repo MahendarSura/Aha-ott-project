@@ -1,0 +1,10 @@
+aha_ott_http_probe: This job is used for HTTP probing to monitor the availability of your Aha OTT application (running on port 3000). It checks for HTTP 200 responses.
+
+aha_ott_metrics: This job monitors the system-level metrics (CPU, memory, disk) using Node Exporter running on port 9100.
+
+aha_ott_kubernetes: This job uses Kubernetes SD (Service Discovery) to automatically discover pods in your Kubernetes cluster and collect metrics from them.
+
+Notes:
+Replace IP with the actual IP address or DNS name where your Aha OTT service is running.
+
+Modify the replacement value to match the correct exporter or monitoring instance's IP address (13.232.214.2:9115 is just an example).
