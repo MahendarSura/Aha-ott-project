@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Aha OTT - A platform for streaming movies and TV shows"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!-- Manifest JSON for PWA -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- Open Graph Meta Tags for Social Media Sharing -->
+    <meta property="og:title" content="Aha OTT - Movie & TV Show Streaming" />
+    <meta
+      property="og:description"
+      content="Aha OTT provides an exclusive streaming platform for movies, TV shows, and original content."
+    />
+    <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
+    <meta property="og:url" content="https://www.ahaott.com" />
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="Aha OTT, streaming, movies, TV shows, original content" />
+    <meta name="author" content="Aha OTT" />
+    <meta name="robots" content="index, follow" />
+
+    <title>Aha OTT - Streaming Movies & TV Shows</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run the Aha OTT app.</noscript>
+    <div id="root"></div>
+    <!-- React app will be injected here -->
+
+    <!-- Firebase or Analytics integration can go here if necessary -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID",
+        measurementId: "YOUR_MEASUREMENT_ID"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+  </body>
+</html>
 
