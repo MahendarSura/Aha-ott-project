@@ -1,0 +1,132 @@
+pipeline {
+    agent any
+    tools {
+        jdk 'jdk'         // Set the JDK version, if required
+        nodejs 'node17'    // Set Node.js version (adjust as per your project's requirement)
+    }
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner'  // Path to SonarQube Scanner tool
+    }
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()  // Clean workspace before starting a new build
+            }
+        }
+
+        stage('Checkout from Git') {
+            steps {
+                // Cloning the GitHub repository for AHA OTT project
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/YourGitHubUsername/aha-ott.git'
+            }
+        }
+
+        stage("SonarQube Analysis") {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    // Running SonarQube scan for static code analysis
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=aha-ott \
+                    -Dsonar.projectKey=aha-ott '''
+                }
+            }
+        }
+
+        stage("Quality Gate") {
+            steps {
+                script {
+                    // Waiting for the quality gate to pass or fail before proceeding
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                // Installing dependencies using npm
+                sh "npm install"
+            }
+        }
+
+        stage('TRIVY FS Scan') {
+            steps {
+                // Running Trivy to scan the file system for vulnerabilities
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
+
+        stage("Docker Build & Push") {
+            steps {
+                script {
+                    // Building Docker image and pushing it to Docker registry
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh "docker build -t aha-ott ."
+                        sh "docker tag aha-ott aseemakram19/aha-ott:latest"
+                        sh "docker push aseemakram19/aha-ott:latest"
+                    }
+                }
+            }
+        }
+
+        stage("TRIVY Image Scan") {
+            steps {
+                // Scanning the Docker image for vulnerabilities using Trivy
+                sh "trivy image aseemakram19/aha-ott:latest > trivyimage.txt"
+            }
+        }
+
+        stage('Deploy to EKS Cluster') {
+            steps {
+                dir('kubernetes') {
+                    script {
+                        // Verifying AWS credentials
+                        sh '''
+                        echo "Verifying AWS credentials..."
+                        aws sts get-caller-identity
+
+                        echo "Configuring kubectl for EKS cluster..."
+                        aws eks update-kubeconfig --region ap-south-1 --name AHA-OTT-Cluster
+
+                        echo "Verifying kubeconfig..."
+                        kubectl config view
+
+                        echo "Deploying application to EKS..."
+                        kubectl apply -f manifest.yml
+
+                        echo "Verifying deployment..."
+                        kubectl get pods
+                        kubectl get svc
+                        '''
+                    }
+                }
+            }
+        }
+
+    }
+    
+    post {
+        always {
+            script {
+                def buildStatus = currentBuild.currentResult
+                def buildUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')[0]?.userId ?: 'Github User'
+                
+                // Sending email notification after the build process is complete
+                emailext (
+                    subject: "Pipeline ${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """
+                        <p>This is a Jenkins AHA OTT CICD pipeline status.</p>
+                        <p>Project: ${env.JOB_NAME}</p>
+                        <p>Build Number: ${env.BUILD_NUMBER}</p>
+                        <p>Build Status: ${buildStatus}</p>
+                        <p>Started by: ${buildUser}</p>
+                        <p>Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                    """,
+                    to: 'youremail@example.com',  // Replace with your email
+                    from: 'youremail@example.com',  // Replace with your email
+                    replyTo: 'youremail@example.com',  // Replace with your email
+                    mimeType: 'text/html',
+                    attachmentsPattern: 'trivyfs.txt,trivyimage.txt'  // Attach scan reports
+                )
+            }
+        }
+    }
+}
