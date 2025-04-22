@@ -1,1 +1,106 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk'         // Define your JDK version if needed
+        nodejs 'node17'    // Define your Node.js version
+    }
+
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner' // Set up SonarQube Scanner tool
+    }
+
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                cleanWs() // Clean the workspace before starting
+            }
+        }
+
+        stage('Checkout from Git') {
+            steps {
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/Aseemakram19/aha-ott.git'
+            }
+        }
+
+        stage("SonarQube Analysis") {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=aha-ott \
+                    -Dsonar.projectKey=aha-ott '''
+                }
+            }
+        }
+
+        stage("Quality Gate") {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh "npm install" // Install the project dependencies using npm
+            }
+        }
+
+        stage('Trivy FS Scan') {
+            steps {
+                sh "trivy fs . > trivyfs.txt" // Scan the file system for vulnerabilities using Trivy
+            }
+        }
+
+        stage("Docker Build & Push") {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh "docker build -t aha-ott ."
+                        sh "docker tag aha-ott aseemakram19/aha-ott:latest"
+                        sh "docker push aseemakram19/aha-ott:latest"
+                    }
+                }
+            }
+        }
+
+        stage("Trivy Image Scan") {
+            steps {
+                sh "trivy image aseemakram19/aha-ott:latest > trivyimage.txt" // Scan the Docker image for vulnerabilities using Trivy
+            }
+        }
+
+        stage('App Deploy to Docker Container') {
+            steps {
+                sh 'docker run -d --name aha-ott -p 3000:3000 aseemakram19/aha-ott:latest' // Run the Docker container
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                def buildStatus = currentBuild.currentResult
+                def buildUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')[0]?.userId ?: 'Github User'
+                
+                emailext (
+                    subject: "Pipeline ${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """
+                        <p>This is a Jenkins AHA OTT CICD pipeline status.</p>
+                        <p>Project: ${env.JOB_NAME}</p>
+                        <p>Build Number: ${env.BUILD_NUMBER}</p>
+                        <p>Build Status: ${buildStatus}</p>
+                        <p>Started by: ${buildUser}</p>
+                        <p>Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                    """,
+                    to: 'your-email@example.com', // Add your email here
+                    from: 'your-email@example.com', // Add the sender's email
+                    replyTo: 'your-email@example.com', // Add the reply-to email
+                    mimeType: 'text/html',
+                    attachmentsPattern: 'trivyfs.txt,trivyimage.txt' // Attach Trivy scan reports
+                )
+            }
+        }
+    }
+}
 
