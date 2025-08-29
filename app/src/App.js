@@ -1092,8 +1092,6 @@ export default function App() {
   );
 }
 
------------------------------------------------------------------
-
 aha movs section and showsecton imaes import code
 
 import React, { useState } from "react";
