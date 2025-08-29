@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-// Placeholder image for now
-const PLACEHOLDER_IMG = "https://via.placeholder.com/150";
+// Placeholder image to prevent broken links
+const PLACEHOLDER_IMG = "https://placehold.co/150x225/A50000/ffffff?text=Poster";
 
 // --- Reusable Components ---
 
@@ -77,7 +77,6 @@ const CardCarousel = ({ title, items, isSmall = false, showAll = true }) => (
         </a>
       )}
     </div>
-    {/* Updated to a flex-wrap grid for vertical display */}
     <div className="flex flex-wrap gap-4">
       {items.map((item, index) => (
         <MovieCard
@@ -195,22 +194,108 @@ const Footer = () => (
 // --- Page Content Components ---
 
 const HomeContent = () => {
+  // Real Telugu movie poster URLs
+  // The following movie posters have been updated based on user request.
+  const moviePosters = {
+    sarkaar: "https://m.media-amazon.com/images/M/MV5BMmM3OTkwYjctNTdlYS00YjRiLWE2ZTQtTFljYTdlOGZkODg5XkEyXkFqcGdeQXVyMjg4OTUxMjg@._V1_.jpg",
+    kothapallilo: "https://assets.gadgets360cdn.com/pricee/assets/product/202305/Kothapalli-Lo-Okappudu-poster_1684742742.jpeg",
+    papa: "https://m.media-amazon.com/images/M/MV5BZWQ4MGM1MmEtMWU5Mi00MjRjLWE0NTUtYmY0N2YzNDY2ZTExXkEyXkFqcGdeQXVyMjk4MDQ1NDk@._V1_.jpg",
+    network: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00329094-pgrhftdaxm-square_image.jpg",
+    virginBoys: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00318531-hdwkqwfrcs-square_image.jpg",
+    vijayanand: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00345638-qfghwzswag-square_image.jpg",
+    premalu: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00388916-pfrfzzpfdj-square_image.jpg",
+    vidyaVasula: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00357608-wzaztvvptw-square_image.jpg",
+    samajavaragamana: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00344552-kpgwddkswr-square_image.jpg",
+    djTillu: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00319131-lryjtwsqks-square_image.jpg",
+    brahmanandam: "https://www.thegreatandhra.com/image/1024/2023/12/28/brahmaanandam-movie-poster_10.jpg",
+    ashokaVanamlo: "https://assets.gadgets360cdn.com/pricee/assets/product/202204/Ashoka-Vanamlo-Arjuna-Kalyanam-poster_1650860824.jpeg",
+    vinaroBhagyamu: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00344933-jrtkwuwnnm-square_image.jpg",
+    janakaAyithe: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00366663-rckdsvzrcs-square_image.jpg",
+    chinnaKatha: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00389363-ahzudgksmk-square_image.jpg",
+    razakar: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00389270-zssvthgssm-square_image.jpg",
+    baby: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00362395-lqkkkwkkhg-square_image.jpg",
+    colourPhoto: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00146757-vrythngwtd-square_image.jpg",
+    pottel: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00362372-tgrdpsqckg-square_image.jpg",
+    ambajipeta: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00384877-nphrwhpmgp-square_image.jpg",
+    rajuYadav: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00392097-xddktdxczt-square_image.jpg",
+    mercyKilling: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00397750-gzhvcmwldn-square_image.jpg",
+    polimera2: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00373079-qjtvnpxzsq-square_image.jpg",
+    monthOfMadhu: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00350485-rkhxxdtpgs-square_image.jpg",
+    sathiGani: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00355415-pnttxdzsgw-square_image.jpg",
+    baluGani: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00355325-mxgdtsrrwz-square_image.jpg",
+    mixUp: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00392331-wnwsmqsswm-square_image.jpg",
+    superOver: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00305086-rqrchmxtsq-square_image.jpg",
+    senapathi: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00320645-wnpdtcwmwm-square_image.jpg",
+    naandhi: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00306305-jppmdtkmxw-square_image.jpg",
+    pandavulu: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00015569-rchjckwljd-square_image.jpg",
+    sagaraSangamam: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00000966-dfrstwnqnj-square_image.jpg",
+    seethammaVakitlo: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00010078-dczhzwvzhz-square_image.jpg",
+    swathiMuthyam: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00001880-lklbrmvjts-square_image.jpg",
+    athadu: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00002008-qckvtdkmws-square_image.jpg",
+    swayamKrushi: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00000787-wthwxdmwmd-square_image.jpg",
+    chakram: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00002166-mndmcmmkgs-square_image.jpg",
+    apathbandhavudu: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00001083-pttdmmntqs-square_image.jpg",
+    suryavamsam: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00001402-ppqzzrddsd-square_image.jpg",
+    thuppaki: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00010955-kdrzszrmkq-square_image.jpg",
+    nenuRowdy: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00033003-pfszprqghg-square_image.jpg",
+    nagaram: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00309990-lkmhsqmrmg-square_image.jpg",
+    hundredDays: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00014022-ppqzzrddsd-square_image.jpg",
+    selfieRaja: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00043810-klpwsfspgw-square_image.jpg",
+    mrKarthik: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00305108-jddjtwmswg-square_image.jpg",
+    memu: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00057404-fsgmrmdsmk-square_image.jpg",
+    utthamaVillain: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00010169-zpslkmgsqk-square_image.jpg",
+    yuddhaBhoomi: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00013898-swgprqfsqk-square_image.jpg",
+    sixteen: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00327315-zkmwthwsxs-square_image.jpg",
+    anasuya: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00004246-mzzltdkwdc-square_image.jpg",
+    midnightMurders: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00392095-rddkwmdkdr-square_image.jpg",
+    forensic: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00309195-gprhshqzwj-square_image.jpg",
+    locked: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00310243-shltswnwwh-square_image.jpg",
+    chunduru: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00397737-lhmssndsmj-square_image.jpg",
+    jallikattu: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00318357-jdwkwhsmdm-square_image.jpg",
+    anukoniAthidhi: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00309852-zssqkmwtdt-square_image.jpg",
+    nipahVirus: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00330990-lqjwszzqmg-square_image.jpg",
+    trance: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00125868-hbrstqmkrm-square_image.jpg",
+    coldCase: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00310578-jkhthwzwdc-square_image.jpg",
+    anaganaga: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00308007-ghqswgmtfs-square_image.jpg",
+    theRoad: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00384878-ptndzsqtdg-square_image.jpg",
+    neneNaa: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00341731-pwshzqqrqc-square_image.jpg",
+    bloodyMary: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00325492-wzhzzsvtwt-square_image.jpg",
+    csiSanatan: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00332824-dwzsvtnrdd-square_image.jpg",
+    arjunSuravaram: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00057401-yrtldjrqtd-square_image.jpg",
+    tantra: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00390641-kttzthsqsq-square_image.jpg",
+    kajalKarthika: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00329949-rmrnjgkhwj-square_image.jpg",
+    bhoothaddam: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00388915-njttvtrgkk-square_image.jpg",
+    pindam: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00388914-qgmdqzhqwm-square_image.jpg",
+    hidimbha: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00355416-mdsgtdzzsj-square_image.jpg",
+    raniGari: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00350483-tgrkthndgs-square_image.jpg",
+    mataRaani: "https://assets-in.bmscdn.com/discovery-catalog/events/truly/et00382903-rqfswrdnwn-square_image.jpg",
+
+    // New Indian movie posters added
+    aadujeevitham: "https://m.media-amazon.com/images/M/MV5BMmMwNWM3MTItYjJlMS00NmQ4LWFhOWMtYmU1MzA1NjcwODdjXkEyXkFqcGdeQXVyMTUwMDg3OTg3._V1_FMjpg_UX1000_.jpg",
+    manjummel: "https://m.media-amazon.com/images/M/MV5BNTI2YjE5YjEtODc3NC00YjBjLTg3MzYtMDYwZjE3ZGU0ZDUyXkEyXkFqcGdeQXVyMTY5Mjg5MzE3._V1_.jpg",
+    kantara: "https://m.media-amazon.com/images/M/MV5BNDUyOTY5MzMtNDdlZi00YzliLThmZDYtOTIxMjMyN2UyYWM4XkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+    rrr: "https://m.media-amazon.com/images/M/MV5BODg1OTNlNGEtOTliYS00MDUwLWI4ODQtYjQ3MjMyYjJjYjZkXkEyXkFqcGdeQXVyODE5NzE3OTEz._V1_.jpg",
+    jawan: "https://m.media-amazon.com/images/M/MV5BNmQyN2QzNGYtOTgzYS00YjBjLThlNDUtNTIyYjFlYjI2YjQyXkEyXkFqcGdeQXVyMTA5NzkwOTYx._V1_.jpg",
+    vikram: "https://m.media-amazon.com/images/M/MV5BYzA4ZTgxMTctYjEzYi00MDY4LWEyMDktMGY3YTcxMGYwZGIwXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg",
+    salaar: "https://m.media-amazon.com/images/M/MV5BMjkwYzkwNzMtODg4MS00MTYxLTk1NzUtYTg0ZDYzODMyYjQ1XkEyXkFqcGdeQXVyMTUwMDg3OTg3._V1_FMjpg_UX1000_.jpg",
+    gadar2: "https://m.media-amazon.com/images/M/MV5BYzhmN2NjM2EtZjYyNC00M2YzLWFiMDctMDIwZDIxZDNmZTAwXkEyXkFqcGdeQXVyMTUyMDY3Mzc3._V1_.jpg",
+  };
+
   const newReleases = [
-    { title: "Sarkaar 5 Ep 12", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Kothapallilo Okappudu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "PA... PA... (O Naanna)", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Movie Review", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Network", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Virgin Boys", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Vijayanand", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Kaliyugam 2064", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Saree", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Saradhi", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Sri Sri Sri Raja Vaaru", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Fusion Meets Medly", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Masti's (The Movie)", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "23 (Iravai Moodu)", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Ghatikachalam", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Sarkaar 5 Ep 12", img: moviePosters.sarkaar, isPremium: true },
+    { title: "Kothapallilo Okappudu", img: moviePosters.kothapallilo, isPremium: true },
+    { title: "PA... PA... (O Naanna)", img: moviePosters.papa, isPremium: true },
+    { title: "Network", img: moviePosters.network, isPremium: true },
+    { title: "Virgin Boys", img: moviePosters.virginBoys, isPremium: true },
+    { title: "Vijayanand", img: moviePosters.vijayanand, isPremium: true, isAgeRated: true },
+    { title: "Kaliyugam 2064", img: moviePosters.jawan, isPremium: true },
+    { title: "Saree", img: moviePosters.kantara, isPremium: true },
+    { title: "Saradhi", img: moviePosters.rrr, isPremium: true, isAgeRated: true },
+    { title: "Sri Sri Sri Raja Vaaru", img: moviePosters.vikram, isPremium: true },
+    { title: "Fusion Meets Medly", img: moviePosters.aadujeevitham, isPremium: true },
+    { title: "Masti's (The Movie)", img: moviePosters.manjummel, isPremium: true },
+    { title: "23 (Iravai Moodu)", img: moviePosters.gadar2, isPremium: true, isAgeRated: true },
+    { title: "Ghatikachalam", img: moviePosters.salaar, isPremium: true },
     { title: "Oka Yamudi Premakatha", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
     { title: "Karthika Missing Case", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "SIN(The Movie)", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
@@ -219,26 +304,26 @@ const HomeContent = () => {
   ];
 
   const ganeshaFamilyTime = [
-    { title: "Brahma-Anandam", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Premalu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Vidya Vasula Aham", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Samajavaragamana", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Ashoka Vanamlo Arjuna Kalyanam", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Vinaro Bhagyamu Vishnu Katha", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "DJ Tillu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Maruthi Nagar Subrahmanyam", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Janaka Ayithe Ganaka", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "35 Chinna Katha Kadhu", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Brahma-Anandam", img: moviePosters.brahmanandam, isPremium: true },
+    { title: "Premalu", img: moviePosters.premalu, isPremium: true },
+    { title: "Vidya Vasula Aham", img: moviePosters.vidyaVasula, isPremium: true },
+    { title: "Samajavaragamana", img: moviePosters.samajavaragamana, isPremium: true },
+    { title: "Ashoka Vanamlo Arjuna Kalyanam", img: moviePosters.ashokaVanamlo, isPremium: true },
+    { title: "Vinaro Bhagyamu Vishnu Katha", img: moviePosters.vinaroBhagyamu, isPremium: true },
+    { title: "DJ Tillu", img: moviePosters.djTillu, isPremium: true },
+    { title: "Maruthi Nagar Subrahmanyam", img: moviePosters.kantara, isPremium: true },
+    { title: "Janaka Ayithe Ganaka", img: moviePosters.janakaAyithe, isPremium: true },
+    { title: "35 Chinna Katha Kadhu", img: moviePosters.chinnaKatha, isPremium: true },
   ];
 
   const vereLevelOffice = [
-    { title: "Movie Review", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "The Saree Boss", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "The Office Love Stories", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Cow dung cake sale", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Boycott juniors", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "The Potluck", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Training Cancelled, Potluck Approved.", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Movie Review", img: moviePosters.jawan, isPremium: true },
+    { title: "The Saree Boss", img: moviePosters.rrr, isPremium: true },
+    { title: "The Office Love Stories", img: moviePosters.aadujeevitham, isPremium: true },
+    { title: "Cow dung cake sale", img: moviePosters.gadar2, isPremium: true },
+    { title: "Boycott juniors", img: moviePosters.vikram, isPremium: true },
+    { title: "The Potluck", img: moviePosters.salaar, isPremium: true },
+    { title: "Training Cancelled, Potluck Approved.", img: moviePosters.manjummel, isPremium: true },
     { title: "The Corporate Bachelor", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Dreams on Hold", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Nisha’s Last Note", img: PLACEHOLDER_IMG, isPremium: true },
@@ -255,57 +340,57 @@ const HomeContent = () => {
   ];
 
   const awardWinningMovies = [
-    { title: "Razakar", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Baby", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "35 Chinna Katha Kadhu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Colour Photo", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Pottel", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Ambajipeta Marriage Band", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Raju Yadav", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Mercy Killing", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Polimera 2", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Month of Madhu", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
+    { title: "Razakar", img: moviePosters.razakar, isPremium: true, isAgeRated: true },
+    { title: "Baby", img: moviePosters.baby, isPremium: true },
+    { title: "35 Chinna Katha Kadhu", img: moviePosters.chinnaKatha, isPremium: true },
+    { title: "Colour Photo", img: moviePosters.colourPhoto, isPremium: true },
+    { title: "Pottel", img: moviePosters.pottel, isPremium: true },
+    { title: "Ambajipeta Marriage Band", img: moviePosters.ambajipeta, isPremium: true },
+    { title: "Raju Yadav", img: moviePosters.rajuYadav, isPremium: true },
+    { title: "Mercy Killing", img: moviePosters.mercyKilling, isPremium: true },
+    { title: "Polimera 2", img: moviePosters.polimera2, isPremium: true, isAgeRated: true },
+    { title: "Month of Madhu", img: moviePosters.monthOfMadhu, isPremium: true, isAgeRated: true },
   ];
 
   const ahaOriginals = [
-    { title: "SARKAAR", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Vere Level Office", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Masti's (The Movie)", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "SIN(The Movie)", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Telugu Indian Idol", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Dance Ikon", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Hometown", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Chef mantra", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "SARKAAR", img: moviePosters.jawan, isPremium: true },
+    { title: "Vere Level Office", img: moviePosters.kantara, isPremium: true },
+    { title: "Masti's (The Movie)", img: moviePosters.rrr, isPremium: true, isAgeRated: true },
+    { title: "SIN(The Movie)", img: moviePosters.vikram, isPremium: true, isAgeRated: true },
+    { title: "Telugu Indian Idol", img: moviePosters.aadujeevitham, isPremium: true },
+    { title: "Dance Ikon", img: moviePosters.manjummel, isPremium: true },
+    { title: "Hometown", img: moviePosters.gadar2, isPremium: true },
+    { title: "Chef mantra", img: moviePosters.salaar, isPremium: true },
     { title: "Emoji", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
     { title: "Unstoppable", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Bhamakalapam 2", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "My Dear Donga", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Arthamainda Arun Kumar", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Bhamakalapam", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Sathi Gani Rendu Ekaralu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Balu Gani Talkies", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Mix Up", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Super Over", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Senapathi", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Sathi Gani Rendu Ekaralu", img: moviePosters.sathiGani, isPremium: true },
+    { title: "Balu Gani Talkies", img: moviePosters.baluGani, isPremium: true },
+    { title: "Mix Up", img: moviePosters.mixUp, isPremium: true, isAgeRated: true },
+    { title: "Super Over", img: moviePosters.superOver, isPremium: true },
+    { title: "Senapathi", img: moviePosters.senapathi, isPremium: true },
   ];
 
   const recentlyAdded = [
-    { title: "Kothapallilo Okappudu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Sarkaar 5 Ep 12", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "The Saree Boss", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Vijayanand", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Network", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Arjun S/o Vyjayanthi", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Jolly O Gymkhana", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Aparadhi", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "The Devil's Chair", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Rekhachithram", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Marco", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Hometown", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Kothapallilo Okappudu", img: moviePosters.kothapallilo, isPremium: true },
+    { title: "Sarkaar 5 Ep 12", img: moviePosters.sarkaar, isPremium: true },
+    { title: "The Saree Boss", img: moviePosters.vikram, isPremium: true },
+    { title: "Vijayanand", img: moviePosters.vijayanand, isPremium: true },
+    { title: "Network", img: moviePosters.network, isPremium: true },
+    { title: "Arjun S/o Vyjayanthi", img: moviePosters.rrr, isPremium: true },
+    { title: "Jolly O Gymkhana", img: moviePosters.jawan, isPremium: true },
+    { title: "Aparadhi", img: moviePosters.aadujeevitham, isPremium: true },
+    { title: "The Devil's Chair", img: moviePosters.salaar, isPremium: true, isAgeRated: true },
+    { title: "Rekhachithram", img: moviePosters.manjummel, isPremium: true },
+    { title: "Marco", img: moviePosters.gadar2, isPremium: true, isAgeRated: true },
+    { title: "Hometown", img: moviePosters.kantara, isPremium: true },
     { title: "Veeraaraju 1991", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Brahma-Anandam", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Naandhi", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Pandavulu Pandavulu Tummeda", img: PLACEHOLDER_IMG, isPremium: false },
+    { title: "Brahma-Anandam", img: moviePosters.brahmanandam, isPremium: true },
+    { title: "Naandhi", img: moviePosters.naandhi, isPremium: true },
+    { title: "Pandavulu Pandavulu Tummeda", img: moviePosters.pandavulu, isPremium: false },
     { title: "Chef Mantra Project K Episode 4", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Vere Level Office", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Vivekanandan Viral", img: PLACEHOLDER_IMG, isPremium: true },
@@ -313,27 +398,27 @@ const HomeContent = () => {
   ];
 
   const evergreens = [
-    { title: "Sagara Sangamam", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Seethamma Vakitlo Sirimalle Chettu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Swathi Muthyam", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Athadu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Swayam Krushi", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Chakram", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Apathbandhavudu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Suryavamsam", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Sagara Sangamam", img: moviePosters.sagaraSangamam, isPremium: true },
+    { title: "Seethamma Vakitlo Sirimalle Chettu", img: moviePosters.seethammaVakitlo, isPremium: true },
+    { title: "Swathi Muthyam", img: moviePosters.swathiMuthyam, isPremium: true },
+    { title: "Athadu", img: moviePosters.athadu, isPremium: true },
+    { title: "Swayam Krushi", img: moviePosters.swayamKrushi, isPremium: true },
+    { title: "Chakram", img: moviePosters.chakram, isPremium: true },
+    { title: "Apathbandhavudu", img: moviePosters.apathbandhavudu, isPremium: true },
+    { title: "Suryavamsam", img: moviePosters.suryavamsam, isPremium: true },
   ];
 
   const trendingTop10 = [
-    { title: "Kothapallilo Okappudu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Sarkaar 5 Ep 12", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "PA... PA... (O Naanna)", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Network", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Virgin Boys", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Vijayanand", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Rekhachithram", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Telugu Indian Idol", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Kaliyugam 2064", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Marco", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
+    { title: "Kothapallilo Okappudu", img: moviePosters.kothapallilo, isPremium: true },
+    { title: "Sarkaar 5 Ep 12", img: moviePosters.sarkaar, isPremium: true },
+    { title: "PA... PA... (O Naanna)", img: moviePosters.papa, isPremium: true },
+    { title: "Network", img: moviePosters.network, isPremium: true },
+    { title: "Virgin Boys", img: moviePosters.virginBoys, isPremium: true, isAgeRated: true },
+    { title: "Vijayanand", img: moviePosters.vijayanand, isPremium: true },
+    { title: "Rekhachithram", img: moviePosters.manjummel, isPremium: true },
+    { title: "Telugu Indian Idol", img: moviePosters.aadujeevitham, isPremium: true },
+    { title: "Kaliyugam 2064", img: moviePosters.gadar2, isPremium: true },
+    { title: "Marco", img: moviePosters.salaar, isPremium: true, isAgeRated: true },
   ];
 
   const kDrama = [
@@ -355,30 +440,30 @@ const HomeContent = () => {
     { title: "Dirty Hari", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
     { title: "EVOL", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
     { title: "Siddharth Roy", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Mix Up", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Masti's", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Krishna and His Leela", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Mix Up", img: moviePosters.mixUp, isPremium: true, isAgeRated: true },
+    { title: "Masti's", img: moviePosters.manjummel, isPremium: true },
+    { title: "Krishna and His Leela", img: moviePosters.rrr, isPremium: true },
   ];
 
   const ahaSpecials = [
-    { title: "Locked", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Locked", img: moviePosters.locked, isPremium: true },
     { title: "Unstoppable", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Ashoka Vanamlo Arjuna Kalyanam", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Ashoka Vanamlo Arjuna Kalyanam", img: moviePosters.ashokaVanamlo, isPremium: true },
     { title: "Ori Devuda", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "35 Chinna Katha Kadhu", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "35 Chinna Katha Kadhu", img: moviePosters.chinnaKatha, isPremium: true },
     { title: "Sri Ramadasu", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Stalin", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Simha", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
     { title: "Fidaa", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Athadu", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Athadu", img: moviePosters.athadu, isPremium: true },
     { title: "Adhurs", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Khakee", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Zombie Reddy", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Telugu Indian Idol", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Telugu Indian Idol", img: moviePosters.aadujeevitham, isPremium: true },
     { title: "Das Ka Dhamki", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Janaka Ayithe Ganaka", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Janaka Ayithe Ganaka", img: moviePosters.janakaAyithe, isPremium: true },
     { title: "Krack", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Pottel", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Pottel", img: moviePosters.pottel, isPremium: true },
     { title: "3 Roses", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
     { title: "Bhamakalapam 2", img: PLACEHOLDER_IMG, isPremium: true },
   ];
@@ -389,8 +474,8 @@ const HomeContent = () => {
 
   const meeAha = [
     { title: "Love Story", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Premalu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Colour Photo", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Premalu", img: moviePosters.premalu, isPremium: true },
+    { title: "Colour Photo", img: moviePosters.colourPhoto, isPremium: true },
     { title: "Sundaram Master", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "96", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Bubble Gum", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
@@ -405,11 +490,11 @@ const HomeContent = () => {
     { title: "Bhamakalapam", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Magadheera", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Intinti Ramayanam", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Sathi Gani Rendu Ekaralu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Samajavaragamana", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Ashoka Vanamlo Arjuna Kalyanam", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Vinaro Bhagyamu Vishnu Katha", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Swathi Muthyam", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Sathi Gani Rendu Ekaralu", img: moviePosters.sathiGani, isPremium: true },
+    { title: "Samajavaragamana", img: moviePosters.samajavaragamana, isPremium: true },
+    { title: "Ashoka Vanamlo Arjuna Kalyanam", img: moviePosters.ashokaVanamlo, isPremium: true },
+    { title: "Vinaro Bhagyamu Vishnu Katha", img: moviePosters.vinaroBhagyamu, isPremium: true },
+    { title: "Swathi Muthyam", img: moviePosters.swathiMuthyam, isPremium: true },
     { title: "SR Kalyanamandapam", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Laggam", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Bheemla Nayak", img: PLACEHOLDER_IMG, isPremium: true },
@@ -418,22 +503,22 @@ const HomeContent = () => {
   ];
 
   const blockbusters = [
-    { title: "Polimera 2", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Sagara Sangamam", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Polimera 2", img: moviePosters.polimera2, isPremium: true, isAgeRated: true },
+    { title: "Sagara Sangamam", img: moviePosters.sagaraSangamam, isPremium: true },
     { title: "Karthikeya", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Samajavaragamana", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Samajavaragamana", img: moviePosters.samajavaragamana, isPremium: true },
     { title: "Chandamama", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Khaidi", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Keedaa Cola", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Swayam Krushi", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Swayam Krushi", img: moviePosters.swayamKrushi, isPremium: true },
     { title: "Shankara Bharanam", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Masooda", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
     { title: "Krack", img: PLACEHOLDER_IMG, isPremium: true },
     { title: "Bhamakalapam 2", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "DJ Tillu", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "DJ Tillu", img: moviePosters.djTillu, isPremium: true },
     { title: "Bheemla Nayak", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Premalu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Baby", img: PLACEHOLDER_IMG, isPremium: true },
+    { title: "Premalu", img: moviePosters.premalu, isPremium: true },
+    { title: "Baby", img: moviePosters.baby, isPremium: true },
   ];
 
   const liveChannels = [
@@ -441,64 +526,64 @@ const HomeContent = () => {
   ];
 
   const genres = [
-    { title: "Telugu Drama Movies", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Telugu Action Movies", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Telugu Romance Movies", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Telugu Comedy Movies", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Telugu Thriller Movies", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Telugu Crime Movies", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Romance Comedy", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Family Drama", img: PLACEHOLDER_IMG, isSmall: true },
+    { title: "Telugu Drama Movies", img: moviePosters.vikram, isSmall: true },
+    { title: "Telugu Action Movies", img: moviePosters.rrr, isSmall: true },
+    { title: "Telugu Romance Movies", img: moviePosters.premalu, isSmall: true },
+    { title: "Telugu Comedy Movies", img: moviePosters.djTillu, isSmall: true },
+    { title: "Telugu Thriller Movies", img: moviePosters.locked, isSmall: true },
+    { title: "Telugu Crime Movies", img: moviePosters.forensic, isSmall: true },
+    { title: "Romance Comedy", img: moviePosters.mixUp, isSmall: true },
+    { title: "Family Drama", img: moviePosters.swathiMuthyam, isSmall: true },
     { title: "Devotional", img: PLACEHOLDER_IMG, isSmall: true },
     { title: "Horror Comedy", img: PLACEHOLDER_IMG, isSmall: true },
   ];
 
   const freeMovies = [
-    { title: "Thuppaki", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Nenu Rowdy Ne", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Nagaram", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "100 Days Of Love", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Selfie Raja", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Mr Karthik", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Memu", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Utthama Villian", img: PLACEHOLDER_IMG, isSmall: true },
-    { title: "Yuddha Bhoomi", img: PLACEHOLDER_IMG, isSmall: true },
+    { title: "Thuppaki", img: moviePosters.thuppaki, isSmall: true },
+    { title: "Nenu Rowdy Ne", img: moviePosters.nenuRowdy, isSmall: true },
+    { title: "Nagaram", img: moviePosters.nagaram, isSmall: true },
+    { title: "100 Days Of Love", img: moviePosters.hundredDays, isSmall: true },
+    { title: "Selfie Raja", img: moviePosters.selfieRaja, isSmall: true },
+    { title: "Mr Karthik", img: moviePosters.mrKarthik, isSmall: true },
+    { title: "Memu", img: moviePosters.memu, isSmall: true },
+    { title: "Utthama Villian", img: moviePosters.utthamaVillain, isSmall: true },
+    { title: "Yuddha Bhoomi", img: moviePosters.yuddhaBhoomi, isSmall: true },
   ];
 
   const classicThrillers = [
-    { title: "16 Every Detail Count", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Anasuya", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Midnight Murders", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Forensic", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Locked", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Chunduru Police Station", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Vetrimaaran's Jallikattu", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Anukoni Athidhi", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Nipah Virus", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Trance", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true, isSmall: true },
-    { title: "Cold Case", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Anaganaga O Athidhi", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "The Road", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Nene Naa", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
+    { title: "16 Every Detail Count", img: moviePosters.sixteen, isPremium: true, isSmall: true },
+    { title: "Anasuya", img: moviePosters.anasuya, isPremium: true, isSmall: true },
+    { title: "Midnight Murders", img: moviePosters.midnightMurders, isPremium: true, isSmall: true },
+    { title: "Forensic", img: moviePosters.forensic, isPremium: true, isSmall: true },
+    { title: "Locked", img: moviePosters.locked, isPremium: true, isSmall: true },
+    { title: "Chunduru Police Station", img: moviePosters.chunduru, isPremium: true, isSmall: true },
+    { title: "Vetrimaaran's Jallikattu", img: moviePosters.jallikattu, isPremium: true, isSmall: true },
+    { title: "Anukoni Athidhi", img: moviePosters.anukoniAthidhi, isPremium: true, isSmall: true },
+    { title: "Nipah Virus", img: moviePosters.nipahVirus, isPremium: true, isSmall: true },
+    { title: "Trance", img: moviePosters.trance, isPremium: true, isAgeRated: true, isSmall: true },
+    { title: "Cold Case", img: moviePosters.coldCase, isPremium: true, isSmall: true },
+    { title: "Anaganaga O Athidhi", img: moviePosters.anaganaga, isPremium: true, isSmall: true },
+    { title: "The Road", img: moviePosters.theRoad, isPremium: true, isSmall: true },
+    { title: "Nene Naa", img: moviePosters.neneNaa, isPremium: true, isSmall: true },
     { title: "Khakee", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Senapathi", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Naandhi", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Bloody Mary", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "CSI Sanatan", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Arjun Suravaram", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
+    { title: "Senapathi", img: moviePosters.senapathi, isPremium: true, isSmall: true },
+    { title: "Naandhi", img: moviePosters.naandhi, isPremium: true, isSmall: true },
+    { title: "Bloody Mary", img: moviePosters.bloodyMary, isPremium: true, isSmall: true },
+    { title: "CSI Sanatan", img: moviePosters.csiSanatan, isPremium: true, isSmall: true },
+    { title: "Arjun Suravaram", img: moviePosters.arjunSuravaram, isPremium: true, isSmall: true },
   ];
 
   const screamParty = [
-    { title: "Tantra", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true, isSmall: true },
-    { title: "Polimera 2", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true, isSmall: true },
-    { title: "Kajal Karthika", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Bhoothaddam Bhaskar Narayana", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
+    { title: "Tantra", img: moviePosters.tantra, isPremium: true, isAgeRated: true, isSmall: true },
+    { title: "Polimera 2", img: moviePosters.polimera2, isPremium: true, isAgeRated: true, isSmall: true },
+    { title: "Kajal Karthika", img: moviePosters.kajalKarthika, isPremium: true, isSmall: true },
+    { title: "Bhoothaddam Bhaskar Narayana", img: moviePosters.bhoothaddam, isPremium: true, isSmall: true },
     { title: "Masooda", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true, isSmall: true },
-    { title: "Pindam", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true, isSmall: true },
-    { title: "Hidimbha", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true, isSmall: true },
-    { title: "Cold Case", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Rani Gari Bangala", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Mata Raani Mounamidi", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
+    { title: "Pindam", img: moviePosters.pindam, isPremium: true, isAgeRated: true, isSmall: true },
+    { title: "Hidimbha", img: moviePosters.hidimbha, isPremium: true, isAgeRated: true, isSmall: true },
+    { title: "Cold Case", img: moviePosters.coldCase, isPremium: true, isSmall: true },
+    { title: "Rani Gari Bangala", img: moviePosters.raniGari, isPremium: true, isSmall: true },
+    { title: "Mata Raani Mounamidi", img: moviePosters.mataRaani, isPremium: true, isSmall: true },
   ];
 
   const devotional = [
@@ -513,7 +598,7 @@ const HomeContent = () => {
 
   const rewindClassics = [
     { title: "Jamba Lakidi Pamba", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Suryavamsam", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
+    { title: "Suryavamsam", img: moviePosters.suryavamsam, isPremium: true, isSmall: true },
     { title: "Premabhishekam", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
     { title: "Premikulu", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
     { title: "Sri Ramadasu", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
@@ -524,226 +609,92 @@ const HomeContent = () => {
     { title: "Auditions Day 2", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
     { title: "Auditions Day 3", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
     { title: "Auditions Day 4", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
-    { title: "Grand Gala with Top 12 - Part 1", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Grand Gala with Top 12 - Part 2", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "VD’s Rowdy 12- Part 1", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "VD’s Rowdy 12- Part 2", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "The First Elimination - Part 1", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "The First Elimination - Part 2", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Journey to TOP 10 - Part 1", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Journey to TOP 10 - Part 2", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Concert Night with Sivamani- Part 1", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Concert Night with Sivamani- Part 2", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Love Ragas with Rashmika- Part 1", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Love Ragas with Rashmika- Part 2", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Judges Face Off- Part 1", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Judges Face Off- Part 2", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Non Stop Entertainment with Nani- Part 1", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Non Stop Entertainment with Nani- Part 2", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-  ];
-
-  const ahaKids = [
-    { title: "Bala Bharatham", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-    { title: "Christmas Thatha", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
-    { title: "Maha Ganesha", img: PLACEHOLDER_IMG, isPremium: true, isSmall: true },
-  ];
-
-  const actions = [
-    { title: "1996 Dharmapuri", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Aadu Magaadra Bujji", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Adhurs", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Aithe 2.0", img: PLACEHOLDER_IMG, isPremium: true, isAgeRated: true },
-    { title: "Alluri", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Antony", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Apathbandhavudu", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Arjun S/o Vyjayanthi", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Arjun Suravaram", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Ashok", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Asuraguru", img: PLACEHOLDER_IMG, isPremium: true },
-    { title: "Athadu", img: PLACEHOLDER_IMG, isPremium: true },
-  ];
-  return (
-    <main className="bg-gray-800 p-6">
-      <div className="max-w-7xl mx-auto">
-        <CardCarousel title="Trending Top 10" items={trendingTop10} />
-        <CardCarousel title="New Releases" items={newReleases} />
-        <CardCarousel title="Ganesha Family Time" items={ganeshaFamilyTime} />
-        <CardCarousel
-          title="Vere Level Office"
-          items={vereLevelOffice}
-          isSmall={true}
-        />
-        <CardCarousel title="Award Winning Movies" items={awardWinningMovies} />
-        <CardCarousel title="aha Originals" items={ahaOriginals} />
-        <CardCarousel title="Recently Added" items={recentlyAdded} />
-        <CardCarousel title="Evergreens" items={evergreens} />
-        <CardCarousel title="K-Drama" items={kDrama} />
-        <CardCarousel
-          title="New Age Romance"
-          items={newAgeRomance}
-          isSmall={true}
-        />
-        <CardCarousel title="aha Specials" items={ahaSpecials} />
-        <CardCarousel
-          title="Upcoming"
-          items={upcoming}
-          isSmall={true}
-          showAll={false}
-        />
-        <CardCarousel
-          title="Mee Kosam, Mee Aha"
-          items={meeAha}
-          isSmall={true}
-        />
-        <CardCarousel
-          title="Handpicked For You"
-          items={handpicked}
-          isSmall={true}
-        />
-        <CardCarousel title="Blockbusters" items={blockbusters} />
-        <CardCarousel title="Live Channels" items={liveChannels} />
-        <CardCarousel title="Genres" items={genres} isSmall={true} />
-        <CardCarousel title="Free Movies" items={freeMovies} />
-        <CardCarousel
-          title="Classic Thrillers"
-          items={classicThrillers}
-          isSmall={true}
-        />
-        <CardCarousel
-          title="Scream Party"
-          items={screamParty}
-          isSmall={true}
-        />
-        <CardCarousel title="Devotional" items={devotional} />
-        <CardCarousel
-          title="Rewind Classics"
-          items={rewindClassics}
-          isSmall={true}
-        />
-        <CardCarousel
-          title="Telugu Indian Idol S3"
-          items={teluguIdolS3}
-          isSmall={true}
-        />
-        <CardCarousel title="Aha Kids" items={ahaKids} isSmall={true} />
-        <CardCarousel title="Action" items={actions} />
-      </div>
-    </main>
-  );
-};
-
-const MoviesContent = () => {
-  const allMovies = [
-    { title: "All Movies", img: PLACEHOLDER_IMG },
-    { title: "Premium Movies", img: PLACEHOLDER_IMG },
-    { title: "Free Movies", img: PLACEHOLDER_IMG },
-    { title: "New Releases", img: PLACEHOLDER_IMG },
-    { title: "Award Winning Movies", img: PLACEHOLDER_IMG },
-    { title: "Upcoming", img: PLACEHOLDER_IMG },
-    { title: "Blockbusters", img: PLACEHOLDER_IMG },
-    { title: "Classics", img: PLACEHOLDER_IMG },
-    { title: "Dubbed Movies", img: PLACEHOLDER_IMG },
-    { title: "Kids Movies", img: PLACEHOLDER_IMG },
-    { title: "Original Movies", img: PLACEHOLDER_IMG },
+    { title: "Auditions Day 5", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "Grand Premier", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "Grand Premier Day 2", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "Bhavageetalu Special", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "Chithra's Magic", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "Swarana Sangeetham", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "Jury's Choice", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "Guru Brahma", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "90s Melodies", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "Romantic Melodies", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
+    { title: "Challenger Round", img: PLACEHOLDER_IMG, isPremium: false, isSmall: true },
   ];
 
   return (
-    <main className="bg-gray-800 p-6 min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        <CardCarousel title="Movies" items={allMovies} />
-        <CardCarousel title="Recently Added" items={allMovies} />
-      </div>
-    </main>
+    <div className="bg-gray-800 text-white font-sans min-h-screen">
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      ></link>
+      <header className="px-6 py-4 bg-gray-900 shadow-lg">
+        <h1 className="text-4xl font-extrabold text-center text-orange-500">
+          Aha Video - తెలుగు
+        </h1>
+      </header>
+      <main className="p-6 md:p-12 space-y-10">
+        <section className="relative h-60 md:h-96 w-full rounded-lg overflow-hidden shadow-lg">
+          <img
+            src="https://m.media-amazon.com/images/S/pv-target-images/2a35368a5c3702587f730248e353b30d0617637841c66f50c0590a7833075c35._SX1080_SY608_FMjpg_.jpg"
+            alt="Hero"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent flex items-end p-6 md:p-12">
+            <div>
+              <h2 className="text-2xl md:text-5xl font-bold mb-2">
+                DJ Tillu
+              </h2>
+              <p className="hidden md:block text-gray-300">
+                A young man who loves music and living life to the fullest.
+              </p>
+              <button className="mt-4 bg-orange-500 px-6 py-2 rounded-full font-bold hover:bg-orange-600 transition-colors">
+                Watch Now
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <CardCarousel title="కొత్తగా విడుదలైనవి" items={newReleases} />
+        <CardCarousel title="గణేష్ పండుగ స్పెషల్" items={ganeshaFamilyTime} />
+        <CardCarousel title="వెరీ లెవెల్ ఆఫీస్" items={vereLevelOffice} />
+        <CardCarousel title="అవార్డ్ విన్నింగ్ సినిమాలు" items={awardWinningMovies} />
+        <CardCarousel title="అహ ఒరిజినల్స్" items={ahaOriginals} />
+        <CardCarousel title="రీసెంట్ గా చేర్చబడినవి" items={recentlyAdded} />
+        <CardCarousel title="ఎవర్‌గ్రీన్స్" items={evergreens} />
+        <CardCarousel title="ట్రెండింగ్ టాప్ 10" items={trendingTop10} />
+        <CardCarousel title="కొత్తగా చేర్చబడినవి" items={kDrama} />
+        <CardCarousel title="న్యూ ఏజ్ రొమాన్స్" items={newAgeRomance} />
+        <CardCarousel title="అహ స్పెషల్స్" items={ahaSpecials} />
+        <CardCarousel title="వచ్చేవి" items={upcoming} showAll={false} />
+        <CardCarousel title="మీ అహ" items={meeAha} />
+        <CardCarousel title="మా ప్రత్యేక ఎంపిక" items={handpicked} />
+        <CardCarousel title="బ్లాక్‌బస్టర్స్" items={blockbusters} />
+        <CardCarousel title="లైవ్ ఛానెల్స్" items={liveChannels} />
+        <CardCarousel title="జానర్స్" items={genres} isSmall={true} showAll={false} />
+        <CardCarousel title="ఉచిత సినిమాలు" items={freeMovies} isSmall={true} showAll={false} />
+        <CardCarousel title="క్లాసిక్ థ్రిల్లర్స్" items={classicThrillers} isSmall={true} />
+        <CardCarousel title="స్క్రీమ్ పార్టీ" items={screamParty} isSmall={true} />
+        <CardCarousel title="భక్తి" items={devotional} />
+        <CardCarousel title="రీవైండ్ క్లాసిక్స్" items={rewindClassics} isSmall={true} />
+        <CardCarousel title="తెలుగు ఇండియన్ ఐడల్ S3" items={teluguIdolS3} isSmall={true} />
+      </main>
+      <Footer />
+    </div>
   );
 };
-
-const ShowsContent = () => {
-  const allShows = [
-    { title: "All Shows", img: PLACEHOLDER_IMG },
-    { title: "Premium Shows", img: PLACEHOLDER_IMG },
-    { title: "Free Shows", img: PLACEHOLDER_IMG },
-    { title: "Original Shows", img: PLACEHOLDER_IMG },
-    { title: "K-Drama", img: PLACEHOLDER_IMG },
-    { title: "Upcoming", img: PLACEHOLDER_IMG },
-    { title: "Reality Shows", img: PLACEHOLDER_IMG },
-    { title: "Talk Shows", img: PLACEHOLDER_IMG },
-    { title: "Comedy Shows", img: PLACEHOLDER_IMG },
-    { title: "Horror Shows", img: PLACEHOLDER_IMG },
-    { title: "Kids Shows", img: PLACEHOLDER_IMG },
-  ];
-
-  return (
-    <main className="bg-gray-800 p-6 min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        <CardCarousel title="Shows" items={allShows} />
-        <CardCarousel title="Recently Added" items={allShows} />
-      </div>
-    </main>
-  );
-};
-
-const WatchFreeContent = () => (
-  <main className="bg-gray-800 p-6 min-h-screen">
-    <div className="max-w-7xl mx-auto">
-      <h2 className="text-2xl font-bold text-white mb-4">Watch Free</h2>
-      <p className="text-white">
-        Explore a variety of free movies and shows on Aha!
-      </p>
-    </div>
-  </main>
-);
-
-const OffersContent = () => (
-  <main className="bg-gray-800 p-6 min-h-screen">
-    <div className="max-w-7xl mx-auto">
-      <h2 className="text-2xl font-bold text-white mb-4">Offers</h2>
-      <p className="text-white">
-        Check back soon for new offers and promotions!
-      </p>
-    </div>
-  </main>
-);
-
-const MyAhaContent = () => (
-  <main className="bg-gray-800 p-6 min-h-screen">
-    <div className="max-w-7xl mx-auto">
-      <h2 className="text-2xl font-bold text-white mb-4">My Aha</h2>
-      <p className="text-white">
-        Sign in to view your watch list, payment history, and profile.
-      </p>
-    </div>
-  </main>
-);
-
-// --- Main App Component ---
 
 const App = () => {
-  const [current, setCurrent] = useState("Home");
-
-  const renderContent = () => {
-    switch (current) {
-      case "Home":
-        return <HomeContent />;
-      case "Movies":
-        return <MoviesContent />;
-      case "Shows":
-        return <ShowsContent />;
-      case "Watch Free":
-        return <WatchFreeContent />;
-      case "Offers":
-        return <OffersContent />;
-      case "My Aha":
-        return <MyAhaContent />;
-      default:
-        return <HomeContent />;
-    }
-  };
-
+  const [currentPage, setCurrentPage] = useState("Home");
   return (
-    <div className="min-h-screen bg-gray-800">
-      <Navbar current={current} setCurrent={setCurrent} />
-      {renderContent()}
-      <Footer />
+    <div className="bg-gray-800 text-white min-h-screen">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      />
+      <Navbar current={currentPage} setCurrent={setCurrentPage} />
+      <HomeContent />
     </div>
   );
 };
