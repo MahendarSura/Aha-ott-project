@@ -66,7 +66,8 @@ const CardCarousel = ({ title, items, isSmall = false, showAll = true }) => (
       <h2 className="text-2xl font-bold text-white">{title}</h2>
       {showAll && <a href="#" className="text-orange-500 hover:underline">See all</a>}
     </div>
-    <div className="flex gap-4 overflow-x-auto scrollbar-hide">
+    {/* Updated to a flex-wrap grid for vertical display */}
+    <div className="flex flex-wrap gap-4"> 
       {items.map((item, index) => (
         <MovieCard
           key={index}
@@ -676,7 +677,7 @@ const HomeContent = () => {
       {/* Genres section with smaller cards */}
       <section className="mb-10">
         <h2 className="text-2xl font-bold text-white mb-4">Genres</h2>
-        <div className="flex gap-4 overflow-x-auto scrollbar-hide">
+        <div className="flex flex-wrap gap-4">
           {genres.map((genre, index) => (
             <MovieCard
               key={index}
