@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 // --- Import all images from a local 'images' directory ---
-import sarkaarPoster from "./images/sarkaar-poster.jpg";
-import kothapalliloOkappuduPoster from "./images/kothapallilo-okappudu-poster.jpg";
 import paNaannaPoster from "./images/pa-naanna-poster.jpg";
 import movieReviewPoster from "./images/movie-review-poster.jpg";
 import networkPoster from "./images/network-poster.jpg";
