@@ -1,1 +1,157 @@
 
+How to Deploy the Aha OTT Project on EC2 Using Kubernetes | Set up Docker | Configure Kubernetes Cluster
+
+Step - 1: Set Up EC2 Instance on AWS
+To deploy the Aha OTT project with Kubernetes on EC2, follow these steps:
+How Docker, kubectl, and eksctl Work Together?
+
+1️⃣ Use Docker to build and run the Aha OTT application container ✅
+2️⃣ Use kubectl to deploy & manage the application on Kubernetes ✅
+3️⃣ Use kubectl to monitor and scale the deployment ✅
+
+👉 kubectl is the command-line tool for interacting with Kubernetes clusters.
+It allows you to:
+✔ Deploy applications
+✔ Manage resources (pods, services, deployments, etc.)
+✔ Monitor cluster health
+✔ Scale workloads
+✔ Debug issues
+
+Prerequisites:
+AWS Account: Ensure you have an AWS account and configure an EC2 instance
+
+Docker: Install Docker on your EC2 instance
+
+kubectl: Install kubectl for managing Kubernetes resources
+
+AWS CLI: Install and configure the AWS CLI
+
+eksctl: Install eksctl (optional if using Amazon EKS for Kubernetes)
+
+Step 1: Launch EC2 Instance
+Launch an EC2 instance (e.g., t2.micro) with Ubuntu as the OS.
+
+SSH into the EC2 instance after it’s up and running.
+
+Install Docker on the EC2 instance:
+
+bash
+Copy
+sudo apt-get update
+sudo apt-get install docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+docker --version
+
+Step 2: Build and Run the Docker Container for Aha OTT
+Clone your Aha OTT project (if applicable):
+
+bash
+Copy
+git clone <your-aha-ott-repository-url>
+cd <your-project-directory>
+Build the Docker image for the Aha OTT project:
+
+bash
+Copy
+docker build -t aha-ott .
+Run the container on the EC2 instance:
+
+bash
+Copy
+docker run -d -p 3000:3000 aha-ott
+
+Step 3: Install kubectl and eksctl (Optional if using EKS)
+Install kubectl for managing Kubernetes clusters:
+
+bash
+Copy
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin
+kubectl version --client
+Install eksctl if you're using Amazon EKS:
+
+bash
+Copy
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+
+Step 4: Create a Kubernetes Cluster
+If you're using Amazon EKS, create a cluster using eksctl:
+
+bash
+Copy
+eksctl create cluster --name aha-ott-cluster --region us-west-2 --node-type t2.medium --nodes-min 2 --nodes-max 4 --zones us-west-2a,us-west-2b
+
+Step 5: Create Kubernetes Deployment and Service for Aha OTT
+Create a manifest.yml file to define the Kubernetes deployment and service for your Aha OTT application:
+
+yaml
+Copy
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aha-ott-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aha-ott
+  template:
+    metadata:
+      labels:
+        app: aha-ott
+    spec:
+      containers:
+      - name: aha-ott
+        image: <your-docker-image-name>:latest
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aha-ott-service
+spec:
+  selector:
+    app: aha-ott
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+Deploy the manifest to Kubernetes:
+
+bash
+Copy
+kubectl apply -f manifest.yml
+
+Step 6: Verify the Deployment
+Check if the pods are running:
+
+bash
+Copy
+kubectl get pods
+Verify the services:
+
+bash
+Copy
+kubectl get svc
+
+Step 7: Scale the Deployment
+If you want to scale the number of replicas, you can use the following command:
+
+bash
+Copy
+kubectl scale deployment aha-ott-deployment --replicas=3
+
+Step 8: Clean Up Resources
+Once you're done with your deployment and testing, delete the EKS cluster and other resources to avoid unnecessary billing:
+
+bash
+Copy
+eksctl delete cluster --name aha-ott-cluster --region us-west-2
+This should guide you through deploying your Aha OTT project on an EC2 instance using Docker and Kubernetes. Let me know if you need any more details!
+
