@@ -1,1 +1,48 @@
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aha-ott-deployment
+  labels:
+    app: aha-ott
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: aha-ott
+  template:
+    metadata:
+      labels:
+        app: aha-ott
+    spec:
+      containers:
+      - name: Aha-container
+        image: mahi1155/Aha:latest   
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "3000"
+        volumeMounts:
+        - name: app-volume
+          mountPath: /usr/src/app
+      volumes:
+      - name: app-volume
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aha-ott-service
+spec:
+  selector:
+    app: aha-ott
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+
