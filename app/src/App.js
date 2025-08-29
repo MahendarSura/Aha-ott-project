@@ -191,15 +191,11 @@ const Footer = () => (
 
 // --- Page Content Components ---
 
-// A simple function to generate a unique placeholder image URL
-const getPlaceholderImage = () => `https://picsum.photos/300/450?random=${Math.random()}`;
-const getSmallPlaceholderImage = () => `https://picsum.photos/300/400?random=${Math.random()}`;
-
 const HomeContent = () => {
   const newReleases = [
-    { title: "Sarkaar 5 Ep 12", img: "http://googleusercontent.com/image_collection/image_retrieval/16129605044319422082", isPremium: true },
-    { title: "Kothapallilo Okappudu", img: "https://tse3.mm.bing.net/th/id/OIP.gW0s1p2p3w4e_r5t6y7u8i9o0p-0a1s2d3f4g5h6j7k8l9zxcvbnm", isPremium: true },
-    { title: "PA... PA... (O Naanna)", img: "https://tse2.mm.bing.net/th/id/OIP.a1s2d3f4g5h6j7k8l9zxcvbnm_y1u2i3o4p5a6s7d8f9g0h1j2k3l4z", isPremium: true },
+    { title: "Sarkaar 5 Ep 12", img: "https://tse1.mm.bing.net/th/id/OIP.gNn5aY8qT3M1zH6X7G8R9eT9h1W5wY2oQ", isPremium: true },
+    { title: "Kothapallilo Okappudu", img: "https://tse3.mm.bing.net/th/id/OIP.2i8V2oX3vC6z0fC1Z6rW9iT6xO4aD2f2o", isPremium: true },
+    { title: "PA... PA... (O Naanna)", img: "https://tse4.mm.bing.net/th/id/OIP.a1s2d3f4g5h6j7k8l9zxcvbnm_y1u2i3o4p5a6s7d8f9g0h1j2k3l4z", isPremium: true },
     { title: "Movie Review", img: "https://tse1.mm.bing.net/th/id/OIP.q-r-s-t-u-v-w-x-y-z-a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p", isPremium: true },
     { title: "Network", img: "https://tse3.mm.bing.net/th/id/OIP.r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g_h_i_j_k_l_m_n_o", isPremium: true },
     { title: "Virgin Boys", img: "https://tse4.mm.bing.net/th/id/OIP.a_b_c_d_e_f_g_h_i_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z", isPremium: true },
@@ -221,7 +217,7 @@ const HomeContent = () => {
 
   const ganeshaFamilyTime = [
     { title: "Brahma-Anandam", img: "https://tse1.mm.bing.net/th/id/OIP.b-r-a-h-m-a-a-n-a-n-d-a-m-p-o-s-t-e-r", isPremium: true },
-    { title: "Premalu", img: "http://googleusercontent.com/image_collection/image_retrieval/5440498470771344716", isPremium: true },
+    { title: "Premalu", img: "https://tse3.mm.bing.net/th/id/OIP.7Z8Y2J9H7H7K9G3C2R5U7E6M8X0B3O6T", isPremium: true },
     { title: "Vidya Vasula Aham", img: "https://tse3.mm.bing.net/th/id/OIP.v-i-d-y-a-v-a-s-u-l-a-a-h-a-m-p-o-s-t-e-r", isPremium: true },
     { title: "Samajavaragamana", img: "https://tse2.mm.bing.net/th/id/OIP.s-a-m-a-j-a-v-a-r-a-g-a-m-a-n-a-p-o-s-t-e-r-s", isPremium: true },
     { title: "Ashoka Vanamlo Arjuna Kalyanam", img: "https://tse3.mm.bing.net/th/id/OIP.a-s-h-o-k-a-v-a-n-a-m-l-o-a-r-j-u-n-a-k-a-l-y-a-n-a-m", isPremium: true },
@@ -264,7 +260,7 @@ const HomeContent = () => {
     { title: "Ambajipeta Marriage Band", img: "https://tse4.mm.bing.net/th/id/OIP.a-m-b-a-j-i-p-e-t-a-m-a-r-r-i-a-g-e-b-a-n-d", isPremium: true },
     { title: "Raju Yadav", img: "https://tse4.mm.bing.net/th/id/OIP.r-a-j-u-y-a-d-a-v-m-o-v-i-e", isPremium: true },
     { title: "Mercy Killing", img: "https://tse4.mm.bing.net/th/id/OIP.m-e-r-c-y-k-i-l-l-i-n-g-m-o-v-i-e-p-o-s-t-e-r", isPremium: true },
-    { title: "Polimera 2", img: "http://googleusercontent.com/image_collection/image_retrieval/1535230213347007934", isPremium: true, isAgeRated: true },
+    { title: "Polimera 2", img: "https://tse2.mm.bing.net/th/id/OIP.L5L6Q9C5F8G7G6J0N4E8X9E2B6O6T8Y3X", isPremium: true, isAgeRated: true },
     { title: "Month of Madhu", img: "https://tse2.mm.bing.net/th/id/OIP.m-o-n-t-h-o-f-m-a-d-h-u-p-o-s-t-e-r", isPremium: true, isAgeRated: true },
   ];
 
@@ -273,7 +269,7 @@ const HomeContent = () => {
     { title: "Vere Level Office", img: "https://tse3.mm.bing.net/th/id/OIP.v-e-r-e-l-e-v-e-l-o-f-f-i-c-e-w-e-b-s-e-r-i-e-s", isPremium: true },
     { title: "Masti's (The Movie)", img: "https://tse4.mm.bing.net/th/id/OIP.m-a-s-t-i-s-t-h-e-m-o-v-i-e-p-o-s-t-e-r", isPremium: true, isAgeRated: true },
     { title: "SIN(The Movie)", img: "https://tse4.mm.bing.net/th/id/OIP.s-i-n-t-h-e-m-o-v-i-e-p-o-s-t-e-r-s", isPremium: true, isAgeRated: true },
-    { title: "Telugu Indian Idol", img: "http://googleusercontent.com/image_collection/image_retrieval/3558982537642954781", isPremium: true },
+    { title: "Telugu Indian Idol", img: "https://tse2.mm.bing.net/th/id/OIP.p3L6C7A1J4K8E0N9S5T1W8M2F7Z4V5R0Q", isPremium: true },
     { title: "Dance Ikon", img: "https://tse1.mm.bing.net/th/id/OIP.d-a-n-c-e-i-k-o-n-t-e-l-u-g-u-s-h-o-w", isPremium: true },
     { title: "Hometown", img: "https://tse4.mm.bing.net/th/id/OIP.h-o-m-e-t-o-w-n-s-h-o-w-p-o-s-t-e-r-s", isPremium: true },
     { title: "Chef mantra", img: "https://tse1.mm.bing.net/th/id/OIP.c-h-e-f-m-a-n-t-r-a-s-h-o-w", isPremium: true },
@@ -314,7 +310,7 @@ const HomeContent = () => {
   ];
 
   const evergreens = [
-    { title: "Sagara Sangamam", img: "http://googleusercontent.com/image_collection/image_retrieval/8645523596173329998", isPremium: true },
+    { title: "Sagara Sangamam", img: "https://tse2.mm.bing.net/th/id/OIP.zQvY4W7G9J5Q2R6T1C9H3U8J6M7B5R0S2", isPremium: true },
     { title: "Seethamma Vakitlo Sirimalle Chettu", img: "https://tse1.mm.bing.net/th/id/OIP.s-e-e-t-h-a-m-m-a-v-a-k-i-t-l-o-s-i-r-i-m-a-l-l-e-c-h", isPremium: true },
     { title: "Swathi Muthyam", img: "https://tse2.mm.bing.net/th/id/OIP.s-w-a-t-h-i-m-u-t-h-y-a-m-m-o-v-i-e-p-o-s-t-e-r", isPremium: true },
     { title: "Athadu", img: "https://tse3.mm.bing.net/th/id/OIP.a-t-h-a-d-u-m-o-v-i-e-p-o-s-t-e-r", isPremium: true },
@@ -332,13 +328,13 @@ const HomeContent = () => {
     { title: "Virgin Boys", img: "https://tse4.mm.bing.net/th/id/OIP.v-i-r-g-i-n-b-o-y-s-m-o-v-i-e", isPremium: true, isAgeRated: true },
     { title: "Vijayanand", img: "https://tse4.mm.bing.net/th/id/OIP.v-i-j-a-y-a-n-a-n-d-m-o-v-i-e", isPremium: true },
     { title: "Rekhachithram", img: "https://tse4.mm.bing.net/th/id/OIP.r-e-k-h-a-c-h-i-t-h-r-a-m-m-o-v-i-e-p-o-s-t-e-r", isPremium: true },
-    { title: "Telugu Indian Idol", img: "http://googleusercontent.com/image_collection/image_retrieval/3558982537642954781", isPremium: true },
+    { title: "Telugu Indian Idol", img: "https://tse2.mm.bing.net/th/id/OIP.p3L6C7A1J4K8E0N9S5T1W8M2F7Z4V5R0Q", isPremium: true },
     { title: "Kaliyugam 2064", img: "https://tse1.mm.bing.net/th/id/OIP.k-a-l-i-y-u-g-a-m-2-0-6-4-m-o-v-i-e", isPremium: true },
     { title: "Marco", img: "https://tse4.mm.bing.net/th/id/OIP.m-a-r-c-o-m-o-v-i-e-p-o-s-t-e-r", isPremium: true, isAgeRated: true },
   ];
 
   const kDrama = [
-    { title: "FIGHT FOR MY WAY", img: "https://tse3.mm.bing.net/th/id/OIP.f-i-g-h-t-f-o-r-m-y-w-a-y-k-d-r-a-m-a", isPremium: true },
+    { title: "FIGHT FOR MY WAY", img: "https://tse1.mm.bing.net/th/id/OIP.p5L8C9T2H7E5G4K3V1R6Q8J0W4Y1Z9F8", isPremium: true },
     { title: "Hwarang - The Poet Warrior Youth", img: "https://tse4.mm.bing.net/th/id/OIP.h-w-a-r-a-n-g-t-h-e-p-o-e-t-w-a-r-r-i-o-r-y", isPremium: true },
     { title: "Youth of May", img: "https://tse3.mm.bing.net/th/id/OIP.y-o-u-t-h-o-f-m-a-y-k-d-r-a-m-a", isPremium: true },
     { title: "SCHOOL 2017", img: "https://tse1.mm.bing.net/th/id/OIP.s-c-h-o-o-l-2-0-1-7-k-d-r-a-m-a", isPremium: true },
@@ -346,7 +342,7 @@ const HomeContent = () => {
   ];
 
   const newAgeRomance = [
-    { title: "3 Roses", img: "https://tse3.mm.bing.net/th/id/OIP.3-r-o-s-e-s-w-e-b-s-e-r-i-e-s", isPremium: true, isAgeRated: true },
+    { title: "3 Roses", img: "https://tse4.mm.bing.net/th/id/OIP.8B3W4M7J5Z9X2L6F0S1D4Q5G7H2K6P0R", isPremium: true, isAgeRated: true },
     { title: "SIN(The Movie)", img: "https://tse2.mm.bing.net/th/id/OIP.s-i-n-t-h-e-m-o-v-i-e-p-o-s-t-e-r", isPremium: true, isAgeRated: true },
     { title: "Sshhh", img: "https://tse4.mm.bing.net/th/id/OIP.s-s-h-h-h-m-o-v-i-e-p-o-s-t-e-r", isPremium: true, isAgeRated: true },
     { title: "Bubble Gum", img: "https://tse3.mm.bing.net/th/id/OIP.b-u-b-b-l-e-g-u-m-m-o-v-i-e-p-o-s-t-e-r", isPremium: true, isAgeRated: true },
@@ -375,7 +371,7 @@ const HomeContent = () => {
     { title: "Adhurs", img: "https://tse2.mm.bing.net/th/id/OIP.a-d-h-u-r-s-m-o-v-i-e-p-o-s-t-e-r", isPremium: true },
     { title: "Khakee", img: "https://tse2.mm.bing.net/th/id/OIP.k-h-a-k-e-e-m-o-v-i-e-p-o-s-t-e-r", isPremium: true },
     { title: "Zombie Reddy", img: "https://tse3.mm.bing.net/th/id/OIP.z-o-m-b-i-e-r-e-d-d-y-m-o-v-i-e-p-o-s-t-e-r", isPremium: true },
-    { title: "Telugu Indian Idol", img: "http://googleusercontent.com/image_collection/image_retrieval/3558982537642954781", isPremium: true },
+    { title: "Telugu Indian Idol", img: "https://tse2.mm.bing.net/th/id/OIP.p3L6C7A1J4K8E0N9S5T1W8M2F7Z4V5R0Q", isPremium: true },
     { title: "Das Ka Dhamki", img: "https://tse4.mm.bing.net/th/id/OIP.d-a-s-k-a-d-h-a-m-k-i-m-o-v-i-e", isPremium: true },
     { title: "Janaka Ayithe Ganaka", img: "https://tse4.mm.bing.net/th/id/OIP.j-a-n-a-k-a-a-y-i-t-h-e-g-a-n-a-k-a-p-o-s-t-e-r", isPremium: true },
     { title: "Krack", img: "https://tse1.mm.bing.net/th/id/OIP.k-r-a-c-k-m-o-v-i-e-p-o-s-t-e-r", isPremium: true },
@@ -390,7 +386,7 @@ const HomeContent = () => {
 
   const meeAha = [
     { title: "Love Story", img: "https://tse3.mm.bing.net/th/id/OIP.l-o-v-e-s-t-o-r-y-m-o-v-i-e", isPremium: true },
-    { title: "Premalu", img: "http://googleusercontent.com/image_collection/image_retrieval/5440498470771344716", isPremium: true },
+    { title: "Premalu", img: "https://tse3.mm.bing.net/th/id/OIP.7Z8Y2J9H7H7K9G3C2R5U7E6M8X0B3O6T", isPremium: true },
     { title: "Colour Photo", img: "https://tse4.mm.bing.net/th/id/OIP.c-o-l-o-u-r-p-h-o-t-o-t-e-l-u-g-u-m-o-v-i-e", isPremium: true },
     { title: "Sundaram Master", img: "https://tse4.mm.bing.net/th/id/OIP.s-u-n-d-a-r-a-m-m-a-s-t-e-r-m-o-v-i-e", isPremium: true },
     { title: "96", img: "https://tse2.mm.bing.net/th/id/OIP.9-6-t-a-m-i-l-m-o-v-i-e", isPremium: true },
@@ -419,8 +415,8 @@ const HomeContent = () => {
   ];
 
   const blockbusters = [
-    { title: "Polimera 2", img: "http://googleusercontent.com/image_collection/image_retrieval/1535230213347007934", isPremium: true, isAgeRated: true },
-    { title: "Sagara Sangamam", img: "http://googleusercontent.com/image_collection/image_retrieval/8645523596173329998", isPremium: true },
+    { title: "Polimera 2", img: "https://tse2.mm.bing.net/th/id/OIP.L5L6Q9C5F8G7G6J0N4E8X9E2B6O6T8Y3X", isPremium: true, isAgeRated: true },
+    { title: "Sagara Sangamam", img: "https://tse2.mm.bing.net/th/id/OIP.zQvY4W7G9J5Q2R6T1C9H3U8J6M7B5R0S2", isPremium: true },
     { title: "Karthikeya", img: "https://tse2.mm.bing.net/th/id/OIP.k-a-r-t-h-i-k-e-y-a-t-e-l-u-g-u-m-o-v-i-e", isPremium: true },
     { title: "Samajavaragamana", img: "https://tse2.mm.bing.net/th/id/OIP.s-a-m-a-j-a-v-a-r-a-g-a-m-a-n-a", isPremium: true },
     { title: "Chandamama", img: "https://tse2.mm.bing.net/th/id/OIP.c-h-a-n-d-a-m-a-m-a-m-o-v-i-e", isPremium: true },
@@ -433,7 +429,7 @@ const HomeContent = () => {
     { title: "Bhamakalapam 2", img: "https://tse4.mm.bing.net/th/id/OIP.b-h-a-m-a-k-a-l-a-p-a-m-2-m-o-v-i-e", isPremium: true },
     { title: "DJ Tillu", img: "https://tse4.mm.bing.net/th/id/OIP.d-j-t-i-l-l-u-m-o-v-i-e", isPremium: true },
     { title: "Bheemla Nayak", img: "https://tse3.mm.bing.net/th/id/OIP.b-h-e-e-m-l-a-n-a-y-a-k-m-o-v-i-e-p-o-s-t-e-r", isPremium: true },
-    { title: "Premalu", img: "http://googleusercontent.com/image_collection/image_retrieval/5440498470771344716", isPremium: true },
+    { title: "Premalu", img: "https://tse3.mm.bing.net/th/id/OIP.7Z8Y2J9H7H7K9G3C2R5U7E6M8X0B3O6T", isPremium: true },
     { title: "Baby", img: "https://tse4.mm.bing.net/th/id/OIP.b-a-b-y-t-e-l-u-g-u-m-o-v-i-e-p-o-s-t-e-r-s", isPremium: true },
   ];
 
@@ -491,7 +487,7 @@ const HomeContent = () => {
 
   const screamParty = [
     { title: "Tantra", img: "https://tse4.mm.bing.net/th/id/OIP.t-a-n-t-r-a-m-o-v-i-e-p-o-s-t-e-r", isPremium: true, isAgeRated: true, isSmall: true },
-    { title: "Polimera 2", img: "http://googleusercontent.com/image_collection/image_retrieval/1535230213347007934", isPremium: true, isAgeRated: true, isSmall: true },
+    { title: "Polimera 2", img: "https://tse2.mm.bing.net/th/id/OIP.L5L6Q9C5F8G7G6J0N4E8X9E2B6O6T8Y3X", isPremium: true, isAgeRated: true, isSmall: true },
     { title: "Kajal Karthika", img: "https://tse3.mm.bing.net/th/id/OIP.k-a-j-a-l-k-a-r-t-h-i-k-a-m-o-v-i-e", isPremium: true, isSmall: true },
     { title: "Bhoothaddam Bhaskar Narayana", img: "https://tse4.mm.bing.net/th/id/OIP.b-h-o-o-t-h-a-d-d-a-m-b-h-a-s-k-a-r-n-a-r-a-y-a", isPremium: true, isSmall: true },
     { title: "Masooda", img: "https://tse4.mm.bing.net/th/id/OIP.m-a-s-o-o-d-a-m-o-v-i-e", isPremium: true, isAgeRated: true, isSmall: true },
@@ -635,7 +631,7 @@ const HomeContent = () => {
 
 const MoviesContent = () => {
   const allMovies = [
-    { title: "All Movies", img: "https://tse3.mm.bing.net/th/id/OIP.a-l-l-m-o-v-i-e-s-p-o-s-t-e-r-s" },
+    { title: "All Movies", img: "https://tse2.mm.bing.net/th/id/OIP.c-h-a-n-d-a-m-a-m-a-m-o-v-i-e-s" },
     { title: "Premium Movies", img: "https://tse4.mm.bing.net/th/id/OIP.p-r-e-m-i-u-m-m-o-v-i-e-s-p-o-s-t-e-r-s" },
     { title: "Free Movies", img: "https://tse2.mm.bing.net/th/id/OIP.f-r-e-e-m-o-v-i-e-s-p-o-s-t-e-r-s" },
     { title: "New Releases", img: "https://tse4.mm.bing.net/th/id/OIP.n-e-w-r-e-l-e-a-s-e-s-p-o-s-t-e-r-s" },
