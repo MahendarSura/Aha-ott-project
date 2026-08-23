@@ -1,14 +1,13 @@
-# 🚀 **Enterprise Aha OTT — Cloud-Native DevSecOps Streaming Platform**
+# 🚀 **Enterprise Aha OTT — Cloud-Native DevSecOps Platform**
 
 [![AWS](https://img.shields.io/badge/AWS-Cloud-232F3E?style=for-the-badge\&logo=amazon-web-services\&logoColor=white)](https://aws.amazon.com/)
 [![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC?style=for-the-badge\&logo=terraform\&logoColor=white)](https://www.terraform.io/)
-[![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-326CE5?style=for-the-badge\&logo=kubernetes\&logoColor=white)](https://kubernetes.io/)
 [![Amazon EKS](https://img.shields.io/badge/Amazon-EKS-FF9900?style=for-the-badge\&logo=amazon-aws\&logoColor=white)](https://aws.amazon.com/eks/)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-326CE5?style=for-the-badge\&logo=kubernetes\&logoColor=white)](https://kubernetes.io/)
 [![Docker](https://img.shields.io/badge/Docker-Containers-2496ED?style=for-the-badge\&logo=docker\&logoColor=white)](https://www.docker.com/)
 [![Helm](https://img.shields.io/badge/Helm-Packaging-0F1689?style=for-the-badge\&logo=helm\&logoColor=white)](https://helm.sh/)
 [![ArgoCD](https://img.shields.io/badge/ArgoCD-GitOps-EF7B4D?style=for-the-badge\&logo=argo\&logoColor=white)](https://argo-cd.readthedocs.io/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?style=for-the-badge\&logo=github-actions\&logoColor=white)](https://github.com/features/actions)
-[![DevSecOps](https://img.shields.io/badge/DevSecOps-Security-red?style=for-the-badge)](https://owasp.org/)
 [![Trivy](https://img.shields.io/badge/Trivy-Security-1904DA?style=for-the-badge)](https://trivy.dev/)
 [![Checkov](https://img.shields.io/badge/Checkov-IaC_Security-6B4FBB?style=for-the-badge)](https://www.checkov.io/)
 [![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-E6522C?style=for-the-badge\&logo=prometheus\&logoColor=white)](https://prometheus.io/)
@@ -17,318 +16,211 @@
 
 ---
 
-## 📌 **Project Overview**
+## 📌 **Overview**
 
-Welcome to the **Enterprise Aha OTT — Cloud-Native DevSecOps Streaming Platform**.
+**Aha OTT** is a production-oriented, cloud-native OTT streaming platform designed using modern **AWS, Kubernetes, DevOps, DevSecOps, GitOps, CI/CD, Infrastructure as Code, and observability practices**.
 
-This project demonstrates a production-oriented **OTT streaming platform architecture** designed around modern **AWS cloud infrastructure, Kubernetes, containers, Infrastructure as Code, GitOps, CI/CD, DevSecOps, monitoring, observability, scalability, and operational automation**.
+The platform demonstrates how an OTT application can be deployed and operated on a highly available AWS infrastructure using automated, secure, and repeatable engineering workflows.
 
-The platform is designed to represent the infrastructure and engineering practices required to operate a modern OTT application similar to a large-scale video streaming service.
-
-### 🎯 **Platform Capabilities**
+### 🎯 **Key Capabilities**
 
 * ☁️ AWS cloud infrastructure
-* 🌐 Highly available cloud networking
+* 🌐 Multi-AZ networking
 * 🏗️ Terraform Infrastructure as Code
-* ☸️ Amazon EKS Kubernetes platform
+* ☸️ Amazon EKS
 * 🐳 Docker containerization
 * ⛵ Helm application packaging
 * 🔄 ArgoCD GitOps
 * 🚀 GitHub Actions CI/CD
-* 🔐 DevSecOps security automation
-* 🔍 Trivy vulnerability scanning
+* 🔐 DevSecOps security controls
+* 🔍 Trivy container scanning
 * 🛡️ Checkov IaC security scanning
 * 📊 Prometheus monitoring
 * 📈 Grafana observability
-* ⚙️ Automated deployment
-* 🧪 Infrastructure and application validation
+* 🚨 Alertmanager
+* ♻️ Disaster recovery architecture
+* 🧪 Automated validation
 * 📚 Operational documentation
-* ♻️ Production resilience practices
-
-The architecture follows the principles of:
-
-**Automation → Security → Scalability → Availability → Observability → Continuous Delivery**
 
 ---
 
-# 🏗️ **Platform Architecture**
+# 🏗️ **Architecture**
 
 ```text
-                              INTERNET
-                                  |
-                                  v
-                       +----------------------+
-                       |      OTT USERS       |
-                       |  Web / Mobile / TV   |
-                       +----------+-----------+
-                                  |
-                                  v
-                       +----------------------+
-                       |   AWS Load Balancer  |
-                       |       / Ingress      |
-                       +----------+-----------+
-                                  |
-                                  v
-                       +----------------------+
-                       |       AWS VPC        |
-                       |   Multi-AZ Network    |
-                       +----------+-----------+
-                                  |
-             +--------------------+--------------------+
-             |                    |                    |
-             v                    v                    v
-        +---------+          +---------+          +---------+
-        |  AZ-1   |          |  AZ-2   |          |  AZ-3   |
-        | Private |          | Private |          | Private |
-        | Subnet  |          | Subnet  |          | Subnet  |
-        +----+----+          +----+----+          +----+----+
-             |                    |                    |
-             +--------------------+--------------------+
-                                  |
-                                  v
-                       +----------------------+
-                       |     Amazon EKS       |
-                       | Kubernetes Platform  |
-                       +----------+-----------+
-                                  |
-          +-----------------------+-----------------------+
-          |                       |                       |
-          v                       v                       v
-   +-------------+         +-------------+         +-------------+
-   | OTT Backend |         | OTT Content |         | OTT API     |
-   | Services    |         | Services    |         | Services    |
-   +------+------+         +------+------+         +------+------+
-          |                       |                       |
-          +-----------------------+-----------------------+
-                                  |
-                    +-------------+-------------+
-                    |                           |
-                    v                           v
-             +-------------+             +-------------+
-             | Application |             |   Data /    |
-             | Services    |             | Persistence |
-             +-------------+             +-------------+
-                    |                           |
-                    |                           v
-                    |                    Managed AWS Data
-                    |
-                    v
-             Streaming / Media
-             Delivery Layer
+                                INTERNET
+                                    |
+                                    v
+                         +----------------------+
+                         |      OTT USERS       |
+                         |  Web / Mobile / TV   |
+                         +----------+-----------+
+                                    |
+                                    v
+                         +----------------------+
+                         |  AWS Load Balancer   |
+                         |     / Ingress        |
+                         +----------+-----------+
+                                    |
+                                    v
+                         +----------------------+
+                         |       AWS VPC        |
+                         |    Multi-AZ Network  |
+                         +----------+-----------+
+                                    |
+                +-------------------+-------------------+
+                |                   |                   |
+                v                   v                   v
+             +------+            +------+            +------+
+             | AZ-1 |            | AZ-2 |            | AZ-3 |
+             |Private|           |Private|           |Private|
+             |Subnet |           |Subnet |           |Subnet |
+             +--+---+            +--+---+            +--+---+
+                |                   |                   |
+                +-------------------+-------------------+
+                                    |
+                                    v
+                         +----------------------+
+                         |     Amazon EKS       |
+                         | Kubernetes Platform  |
+                         +----------+-----------+
+                                    |
+              +---------------------+---------------------+
+              |                     |                     |
+              v                     v                     v
+        +-----------+         +-----------+         +-----------+
+        | OTT APIs  |         | Backend   |         | Platform  |
+        | Services  |         | Services  |         | Services  |
+        +-----+-----+         +-----+-----+         +-----+-----+
+              |                     |                     |
+              +---------------------+---------------------+
+                                    |
+                                    v
+                         +----------------------+
+                         |   AWS Data / Media   |
+                         |       Services       |
+                         +----------------------+
 
 
-                 DEVOPS / DEVSECOPS PIPELINE
-                              |
-                              v
-                    +-------------------+
-                    | GitHub Repository  |
-                    +---------+---------+
-                              |
-                              v
-                    +-------------------+
-                    | GitHub Actions     |
-                    +---------+---------+
-                              |
-          +-------------------+-------------------+
-          |                   |                   |
-          v                   v                   v
-      Terraform            Trivy               Checkov
-      Validation           Security             IaC Scan
-                              |
-          +-------------------+-------------------+
-                              |
-                              v
-                       Docker Build
-                              |
-                              v
-                       Container Image
-                              |
-                              v
-                           Registry
-                              |
-                              v
-                           ArgoCD
-                              |
-                              v
-                        Amazon EKS
+                       DEVSECOPS / GITOPS
+                                    |
+                                    v
+                         +----------------------+
+                         |   GitHub Repository  |
+                         +----------+-----------+
+                                    |
+                                    v
+                         +----------------------+
+                         |    GitHub Actions     |
+                         +----------+-----------+
+                                    |
+                  +-----------------+-----------------+
+                  |                 |                 |
+                  v                 v                 v
+             Validation          Trivy             Checkov
+                  |              Security            IaC
+                  |               Scan               Scan
+                  +-----------------+-----------------+
+                                    |
+                                    v
+                              Docker Build
+                                    |
+                                    v
+                             Container Registry
+                                    |
+                                    v
+                                  ArgoCD
+                                    |
+                                    v
+                               Amazon EKS
 
 
-                     OBSERVABILITY LAYER
-                              |
-                              v
-                       +--------------+
-                       |  Prometheus  |
-                       +------+-------+
-                              |
-                              v
-                       +--------------+
-                       | Alertmanager |
-                       +------+-------+
-                              |
-                              v
-                       +--------------+
-                       |   Grafana    |
-                       +--------------+
+                         OBSERVABILITY
+                                    |
+                                    v
+                              Prometheus
+                                    |
+                                    v
+                             Alertmanager
+                                    |
+                                    v
+                                Grafana
 ```
 
 ---
 
-## 🧩 **Architecture Components**
+# 🧩 **Technology Stack**
 
-| **Layer**        | **Components**                       |
-| ---------------- | ------------------------------------ |
-| ☁️ Cloud         | AWS                                  |
-| 🌐 Networking    | VPC, Public Subnets, Private Subnets |
-| 🌍 Availability  | Multi-AZ Architecture                |
-| ⚖️ Traffic       | Load Balancer / Kubernetes Ingress   |
-| ☸️ Platform      | Amazon EKS                           |
-| 📦 Workloads     | Kubernetes Deployments & Services    |
-| 🐳 Containers    | Docker                               |
-| ⛵ Packaging      | Helm                                 |
-| 🔄 GitOps        | ArgoCD                               |
-| 🚀 CI/CD         | GitHub Actions                       |
-| 🔐 Security      | Trivy, Checkov, IAM                  |
-| 📊 Monitoring    | Prometheus                           |
-| 📈 Visualization | Grafana                              |
-| 🚨 Alerting      | Alertmanager                         |
-| 🗄️ Data         | AWS Managed Data Services            |
-| 📺 Application   | OTT Streaming Platform               |
-| 🧪 Testing       | Automated Validation                 |
-| ⚙️ Automation    | Terraform, Scripts, Makefile         |
+| **Category**       | **Technology**                   |
+| ------------------ | -------------------------------- |
+| ☁️ Cloud           | AWS                              |
+| 🌐 Networking      | Amazon VPC, Multi-AZ             |
+| 🏗️ Infrastructure | Terraform                        |
+| ☸️ Kubernetes      | Amazon EKS                       |
+| 🐳 Containers      | Docker                           |
+| ⛵ Packaging        | Helm                             |
+| 🔄 GitOps          | ArgoCD                           |
+| 🚀 CI/CD           | GitHub Actions                   |
+| 🔐 Security        | Trivy, Checkov, IAM              |
+| 📊 Monitoring      | Prometheus                       |
+| 📈 Observability   | Grafana                          |
+| 🚨 Alerting        | Alertmanager                     |
+| 🧪 Validation      | Terraform, Kubernetes, CI checks |
+| ♻️ Resilience      | Multi-AZ / Disaster Recovery     |
 
 ---
 
-# 🔄 **End-to-End OTT DevSecOps Workflow**
+# 🔄 **DevSecOps Workflow**
 
 ```text
-                         DEVELOPER
-                             |
-                             v
-                    +----------------+
-                    | GitHub Repo     |
-                    +-------+--------+
-                            |
-                            v
-                    +----------------+
-                    | GitHub Actions  |
-                    +-------+--------+
-                            |
-             +--------------+--------------+
-             |              |              |
-             v              v              v
-        CI Validation    Trivy          Checkov
-             |          Security       IaC Security
-             |           Scan             Scan
-             +--------------+--------------+
-                            |
-                            v
-                     Docker Build
-                            |
-                            v
-                    Container Image
-                            |
-                            v
-                       Registry
-                            |
-                            v
-                         ArgoCD
-                            |
-                            v
-                      Amazon EKS
-                            |
-                            v
-                    OTT Application
-                            |
-             +--------------+--------------+
-             |                             |
-             v                             v
-      Application APIs              Streaming Services
-             |                             |
-             +--------------+--------------+
-                            |
-                            v
-                      AWS Services
-                            |
-                            v
-                     End Users
+Developer
+    |
+    v
+GitHub Repository
+    |
+    v
+GitHub Actions
+    |
+    +-------------------+-------------------+
+    |                   |                   |
+    v                   v                   v
+CI Validation        Trivy               Checkov
+    |               Security Scan        IaC Scan
+    +-------------------+-------------------+
+                        |
+                        v
+                   Docker Build
+                        |
+                        v
+                 Container Registry
+                        |
+                        v
+                     ArgoCD
+                        |
+                        v
+                   Amazon EKS
+                        |
+                        v
+                 Aha OTT Platform
 ```
 
 ### 🔁 **Deployment Flow**
 
-1. 👨‍💻 Developer commits application or infrastructure changes.
-2. 📦 Changes are pushed to GitHub.
-3. 🚀 GitHub Actions starts the CI/CD pipeline.
-4. 🏗️ Terraform configuration is validated.
-5. 🔍 Trivy performs security scanning.
-6. 🛡️ Checkov validates Infrastructure as Code.
-7. 🐳 Docker builds the application container.
-8. 📦 Container image is prepared for deployment.
-9. 🔄 ArgoCD detects the desired-state configuration.
-10. ☸️ Kubernetes workloads are synchronized to Amazon EKS.
-11. 📺 OTT services become available through the application ingress.
-12. 📊 Prometheus collects operational metrics.
-13. 📈 Grafana provides dashboards and observability.
-14. 🚨 Alertmanager handles operational alerts.
+1. Developer pushes application or infrastructure changes.
+2. GitHub Actions starts the CI pipeline.
+3. Terraform and configuration validation are performed.
+4. Trivy scans container images and relevant files.
+5. Checkov validates Terraform security.
+6. Docker builds the application image.
+7. The image is published to the configured container registry.
+8. ArgoCD synchronizes the desired Kubernetes state.
+9. Amazon EKS deploys the application workloads.
+10. Prometheus and Grafana provide operational visibility.
 
 ---
 
-# 🛠️ **Technology Stack**
+# 🏗️ **Infrastructure as Code**
 
-| **Category**     | **Technology**            |
-| ---------------- | ------------------------- |
-| ☁️ Cloud         | AWS                       |
-| 🏗️ IaC          | Terraform                 |
-| ☸️ Kubernetes    | Amazon EKS                |
-| 🐳 Containers    | Docker                    |
-| ⛵ Packaging      | Helm                      |
-| 🔄 GitOps        | ArgoCD                    |
-| 🚀 CI/CD         | GitHub Actions            |
-| 🔐 DevSecOps     | Trivy, Checkov            |
-| 🔑 Identity      | AWS IAM                   |
-| 🌐 Networking    | Amazon VPC                |
-| ⚖️ Traffic       | Load Balancing / Ingress  |
-| 📊 Monitoring    | Prometheus                |
-| 📈 Visualization | Grafana                   |
-| 🚨 Alerting      | Alertmanager              |
-| 🧪 Testing       | Automated Validation      |
-| ⚙️ Automation    | Bash / Makefile           |
-| 📺 Platform      | OTT Streaming Application |
-
----
-
-# ☁️ **AWS Cloud Infrastructure**
-
-The OTT platform infrastructure is provisioned using **Terraform Infrastructure as Code**.
-
-### 🏗️ **Infrastructure Includes**
-
-* 🌐 Amazon VPC
-* 🔀 Multi-AZ networking
-* 🌍 Public and private subnets
-* ☸️ Amazon EKS
-* 💻 Kubernetes worker infrastructure
-* ⚖️ Application load balancing
-* 🔑 IAM
-* 🛡️ Security groups and network controls
-* 📊 Monitoring infrastructure
-* 🗄️ AWS managed data services
-* 📺 OTT application infrastructure
-
-The infrastructure is designed to provide:
-
-* ♻️ Repeatability
-* 🧩 Modularity
-* 🔐 Security
-* 📈 Scalability
-* 🚀 Automation
-* 🌎 Environment isolation
-* 🛠️ Operational consistency
-
----
-
-# 🏗️ **Terraform Infrastructure as Code**
-
-Terraform provides declarative infrastructure management for the OTT platform.
+Terraform is used to provision and manage the AWS infrastructure.
 
 ### 📁 **Terraform Structure**
 
@@ -355,82 +247,43 @@ terraform/
 
 ### 🔧 **Terraform Workflow**
 
-```text
-Terraform Configuration
-          |
-          v
-   terraform init
-          |
-          v
-    terraform fmt
-          |
-          v
-  terraform validate
-          |
-          v
-    terraform plan
-          |
-          v
-   terraform apply
-          |
-          v
-     AWS Platform
+```bash
+terraform init
+terraform fmt
+terraform validate
+terraform plan
+terraform apply
 ```
 
 Terraform provides:
 
-* 📜 Version-controlled infrastructure
-* ♻️ Reproducible deployments
-* 🧩 Reusable modules
-* 🔍 Infrastructure validation
-* 🔐 Security validation
-* 🌎 Environment separation
-* 🚀 Automated provisioning
+* Version-controlled infrastructure
+* Reusable modules
+* Repeatable deployments
+* Environment separation
+* Automated infrastructure provisioning
+* Infrastructure validation
 
 ---
 
 # ☸️ **Amazon EKS & Kubernetes**
 
-Amazon EKS provides the Kubernetes control plane for the OTT platform.
+Amazon EKS provides the managed Kubernetes platform for running the OTT workloads.
 
-```text
-                         Amazon EKS
-                             |
-          +------------------+------------------+
-          |                  |                  |
-          v                  v                  v
-    API Services       OTT Services       Platform Services
-          |                  |                  |
-          +------------------+------------------+
-                             |
-                             v
-                    Kubernetes Services
-                             |
-                             v
-                        Ingress Layer
-                             |
-                             v
-                       AWS Load Balancer
-                             |
-                             v
-                           Users
-```
+Kubernetes manages:
 
-### ☸️ **Kubernetes Capabilities**
+* Deployments
+* Services
+* ConfigMaps
+* Secrets
+* Ingress
+* Application workloads
+* Service networking
+* Health checks
+* Scaling
+* Rolling deployments
 
-* 🚀 Deployments
-* 🌐 Services
-* ⚙️ ConfigMaps
-* 🔐 Secrets
-* 🌍 Ingress
-* 📦 Container workloads
-* 🔗 Service networking
-* 📊 Metrics
-* ♻️ Declarative deployments
-* 🛡️ Security controls
-* 📈 Horizontal scalability
-
-Kubernetes configuration is maintained under:
+Kubernetes resources are maintained under:
 
 ```text
 kubernetes/
@@ -438,11 +291,9 @@ kubernetes/
 
 ---
 
-# 🐳 **Docker & Containerization**
+# 🐳 **Docker**
 
-Docker packages OTT application components into portable container images.
-
-### 📦 **Container Workflow**
+Docker provides consistent application packaging across development, staging, and production environments.
 
 ```text
 Application Source
@@ -460,31 +311,17 @@ Application Source
    Trivy Scan
        |
        v
-    Registry
+Container Registry
        |
        v
-    ArgoCD
-       |
-       v
-   Amazon EKS
+    Amazon EKS
 ```
-
-Containerization provides:
-
-* 🐳 Consistent runtime environments
-* 📦 Portable application packaging
-* 🔐 Security scanning
-* 🚀 Faster deployments
-* ☸️ Kubernetes integration
-* ♻️ Repeatable releases
 
 ---
 
-# ⛵ **Helm Application Packaging**
+# ⛵ **Helm**
 
-Helm is used to package and manage Kubernetes workloads.
-
-### 📁 **Helm Structure**
+Helm is used for Kubernetes application packaging and configuration.
 
 ```text
 helm/
@@ -492,53 +329,46 @@ helm/
     ├── Chart.yaml
     ├── values.yaml
     └── templates/
-        ├── deployment.yaml
-        ├── service.yaml
-        ├── ingress.yaml
-        └── configmap.yaml
 ```
 
-### 🚀 **Helm Capabilities**
+Helm provides:
 
-* 📦 Kubernetes application packaging
-* ⚙️ Configuration management
-* 🌎 Environment-specific values
-* 🔄 Repeatable deployments
-* ♻️ Release management
-* 🧩 Reusable templates
-* 🎯 Declarative configuration
+* Reusable Kubernetes templates
+* Configuration management
+* Environment-specific values
+* Repeatable deployments
+* Release management
 
 ---
 
 # 🔄 **GitOps with ArgoCD**
 
-ArgoCD provides continuous delivery using the GitOps model.
+ArgoCD provides GitOps-based continuous delivery.
 
 ```text
-                     GitHub Repository
-                            |
-                            v
-                         ArgoCD
-                            |
-                            v
-                    Desired State
-                            |
-                            v
-                       Amazon EKS
-                            |
-                            v
-                    OTT Application
+GitHub
+   |
+   v
+ArgoCD
+   |
+   v
+Desired Kubernetes State
+   |
+   v
+Amazon EKS
+   |
+   v
+Aha OTT Workloads
 ```
 
-### 🔁 **GitOps Benefits**
+### GitOps Benefits
 
-* 🔄 Continuous synchronization
-* 📜 Git-based deployment history
-* 🔍 Deployment visibility
-* ↩️ Rollback capability
-* 🔐 Controlled deployments
-* 🎯 Desired-state management
-* 🚀 Automated delivery
+* Version-controlled deployments
+* Continuous synchronization
+* Declarative application delivery
+* Deployment visibility
+* Controlled releases
+* Easier rollback
 
 ArgoCD configuration is maintained under:
 
@@ -550,9 +380,9 @@ argocd/
 
 ---
 
-# 🚀 **GitHub Actions CI/CD**
+# 🚀 **CI/CD with GitHub Actions**
 
-GitHub Actions automates the OTT application delivery lifecycle.
+GitHub Actions automates the application delivery lifecycle.
 
 ### 📁 **Workflow Structure**
 
@@ -562,264 +392,144 @@ GitHub Actions automates the OTT application delivery lifecycle.
     ├── ci.yml
     ├── cd.yml
     ├── security.yml
-    └── deploy.yml
+    └── disaster-recovery.yml
 ```
 
-### ⚙️ **Pipeline Responsibilities**
+### Pipeline Responsibilities
 
-* ✅ Source validation
-* 🏗️ Terraform validation
-* 🔍 Security scanning
-* 🛡️ IaC security validation
-* 🐳 Docker image build
-* 📦 Image publishing
-* 🚀 Deployment automation
-* ☸️ Kubernetes delivery
+* CI validation
+* Terraform validation
+* Security scanning
+* Docker image build
+* Container scanning
+* IaC security validation
+* Deployment automation
+* Kubernetes delivery
 
 ---
 
 # 🔐 **Security & DevSecOps**
 
-Security is integrated throughout the OTT application lifecycle.
-
-The project follows a **shift-left DevSecOps approach**.
-
-```text
-                         Developer
-                             |
-                             v
-                      GitHub Repository
-                             |
-                             v
-                      GitHub Actions
-                             |
-             +---------------+---------------+
-             |               |               |
-             v               v               v
-          Checkov          Trivy        Validation
-             |               |               |
-             +---------------+---------------+
-                             |
-                             v
-                       Security Gate
-                             |
-                             v
-                       Docker Build
-                             |
-                             v
-                           ArgoCD
-                             |
-                             v
-                         Amazon EKS
-```
+Security is integrated into the development and deployment lifecycle using a **shift-left security approach**.
 
 ### 🛡️ **Security Controls**
 
-* 🔐 IAM access control
-* 🌐 Network segmentation
-* 🛡️ Security groups
-* ☸️ Kubernetes security
-* 🐳 Container scanning
-* 🔍 Trivy vulnerability scanning
-* 🏗️ Checkov IaC scanning
-* 🔑 Secure configuration
-* 🚀 CI/CD security gates
-* 👤 Least-privilege principles
+* AWS IAM
+* Least-privilege access
+* Network segmentation
+* Security groups
+* Kubernetes security controls
+* Container vulnerability scanning
+* Terraform security validation
+* CI/CD security gates
+* Secure configuration management
 
----
+### 🔍 **Security Tools**
 
-# 🔍 **Trivy Security Scanning**
+**Trivy**
 
-Trivy is integrated into the DevSecOps pipeline.
+Used for container and filesystem vulnerability scanning.
 
-```text
-                  Docker Image
-                       |
-                       v
-                     Trivy
-                       |
-          +------------+------------+
-          |                         |
-          v                         v
-     Vulnerability              Filesystem
-         Scan                      Scan
-          |                         |
-          +------------+------------+
-                       |
-                       v
-                Security Result
-                       |
-                       v
-                 CI/CD Gate
-```
+**Checkov**
 
-Trivy helps identify vulnerabilities before container images are promoted into the deployment pipeline.
+Used to identify security and compliance issues in Infrastructure as Code.
 
----
-
-# 🏗️ **Checkov Infrastructure Security**
-
-Checkov validates Terraform Infrastructure as Code.
+Security configuration is maintained under:
 
 ```text
-                  Terraform Code
-                        |
-                        v
-                     Checkov
-                        |
-          +-------------+-------------+
-          |             |             |
-          v             v             v
-     Misconfig.     Security      Compliance
-      Detection      Policies       Checks
-          |             |             |
-          +-------------+-------------+
-                        |
-                        v
-                Security Validation
+security/
+├── policies/
+├── trivy/
+└── checkov/
 ```
-
-Checkov helps identify infrastructure security issues before deployment.
-
----
-
-# 📺 **OTT Application Architecture**
-
-The platform represents a cloud-native OTT application capable of supporting multiple application services.
-
-```text
-                         OTT USERS
-                            |
-                            v
-                     Load Balancer
-                            |
-                            v
-                       API / Ingress
-                            |
-          +-----------------+-----------------+
-          |                 |                 |
-          v                 v                 v
-      User APIs        Content APIs       Streaming APIs
-          |                 |                 |
-          +-----------------+-----------------+
-                            |
-             +--------------+--------------+
-             |                             |
-             v                             v
-       Application Data             Media / Content
-             |                             |
-             v                             v
-       AWS Data Layer               Media Delivery
-```
-
-### 🎬 **OTT Platform Functions**
-
-* 👤 User access
-* 🔐 Authentication and authorization
-* 🎞️ Content browsing
-* 🔎 Content discovery
-* 📺 Video consumption
-* 🗂️ Content metadata
-* ❤️ User interaction
-* 📊 Application monitoring
-* 🚀 Automated deployments
-
----
-
-# 🌐 **High Availability & Scalability**
-
-The OTT platform uses a Multi-AZ design to reduce dependency on a single Availability Zone.
-
-```text
-                         AWS VPC
-                            |
-          +-----------------+-----------------+
-          |                 |                 |
-          v                 v                 v
-       AZ-1              AZ-2              AZ-3
-          |                 |                 |
-      EKS Nodes         EKS Nodes         EKS Nodes
-          |                 |                 |
-          +-----------------+-----------------+
-                            |
-                            v
-                    OTT Application
-                            |
-                            v
-                       End Users
-```
-
-### 🎯 **Availability Benefits**
-
-* 🔄 Workload distribution
-* 🛡️ Fault isolation
-* 📈 Horizontal scalability
-* 🚀 Improved availability
-* 🌎 Multi-AZ resilience
-* ☸️ Kubernetes self-healing
-* ⚖️ Load distribution
 
 ---
 
 # 📊 **Monitoring & Observability**
 
-The platform contains a dedicated observability layer.
+The platform uses Prometheus and Grafana for operational visibility.
 
 ```text
-                    Amazon EKS
-                        |
-          +-------------+-------------+
-          |                           |
-          v                           v
-   Infrastructure              OTT Workloads
-       Metrics                     Metrics
-          |                           |
-          +-------------+-------------+
-                        |
-                        v
-                    Prometheus
-                        |
-                        v
-                  Alertmanager
-                        |
-                        v
-                     Grafana
-                        |
-                        v
-               Operational Visibility
+AWS Infrastructure
+        |
+        v
+    Amazon EKS
+        |
+        v
+ Kubernetes / Application Metrics
+        |
+        v
+    Prometheus
+        |
+        v
+  Alertmanager
+        |
+        v
+     Grafana
 ```
 
-### 📈 **Monitoring Components**
+Monitoring covers:
 
-* 📊 Prometheus
-* 🚨 Alertmanager
-* 📈 Grafana
-* ☸️ Kubernetes metrics
-* 💻 Infrastructure metrics
-* ❤️ Application health
-* 🔍 Troubleshooting
-* 📈 Performance monitoring
+* Kubernetes health
+* Application workloads
+* Infrastructure metrics
+* Application metrics
+* Resource utilization
+* Alerts
+* Operational troubleshooting
+
+Monitoring configuration is maintained under:
+
+```text
+monitoring/
+```
+
+---
+
+# ♻️ **Disaster Recovery**
+
+The platform includes a disaster recovery architecture designed to improve regional resilience.
+
+```text
+              PRIMARY REGION
+                ap-south-1
+                     |
+                     v
+             Production Platform
+                     |
+                     v
+               DR Automation
+                     |
+                     v
+              DR REGION
+             ap-southeast-1
+                     |
+                     v
+             Recovery Platform
+```
+
+### DR Capabilities
+
+* Multi-region recovery design
+* Infrastructure recreation
+* Recovery automation
+* Backup and recovery procedures
+* DR validation
+* Operational runbooks
+
+Detailed disaster recovery procedures are maintained under:
+
+```text
+docs/disaster-recovery/
+```
 
 ---
 
 # 🧪 **Testing & Validation**
 
-Testing resources are maintained under:
+Testing and validation are integrated into the engineering workflow.
 
-```text
-tests/
-```
-
-### ✅ **Validation Areas**
-
-* 🏗️ Terraform validation
-* ☸️ Kubernetes validation
-* 🐳 Container validation
-* 🔐 Security validation
-* 🚀 Deployment validation
-* ⚙️ Configuration validation
-
-### 🔧 **Terraform Validation**
+### Terraform
 
 ```bash
 terraform fmt -check -recursive
@@ -827,7 +537,7 @@ terraform validate
 terraform plan
 ```
 
-### ☸️ **Kubernetes Validation**
+### Kubernetes
 
 ```bash
 kubectl get nodes
@@ -837,36 +547,45 @@ kubectl get services
 kubectl get ingress
 ```
 
-Testing helps identify infrastructure, configuration, security, and deployment issues before production changes are released.
+### Validation Areas
+
+* Terraform configuration
+* Kubernetes manifests
+* Container images
+* Security configuration
+* CI/CD workflows
+* Deployment configuration
+
+Testing resources are maintained under:
+
+```text
+tests/
+```
 
 ---
 
 # 🌎 **Environment Strategy**
 
-The platform follows environment separation.
+The project supports environment separation for controlled delivery.
 
-| **Environment**    | **Purpose**                                |
-| ------------------ | ------------------------------------------ |
-| 🟢 **Development** | Application and infrastructure development |
-| 🟡 **Staging**     | Pre-production validation                  |
-| 🔴 **Production**  | Production OTT workloads                   |
-
-### 🔄 **Environment Flow**
+| **Environment** | **Purpose**                            |
+| --------------- | -------------------------------------- |
+| 🟢 Development  | Development and infrastructure testing |
+| 🟡 Staging      | Pre-production validation              |
+| 🔴 Production   | Production workloads                   |
 
 ```text
-                  DEVELOPMENT
-                       |
-                       v
-                    STAGING
-                       |
-                       v
-                  PRODUCTION
-                       |
-                       v
-                OBSERVABILITY
+Development
+     |
+     v
+  Staging
+     |
+     v
+ Production
+     |
+     v
+Disaster Recovery
 ```
-
-Environment separation helps reduce deployment conflicts and production risk.
 
 ---
 
@@ -880,21 +599,24 @@ aha-ott/
 │       ├── ci.yml
 │       ├── cd.yml
 │       ├── security.yml
-│       └── deploy.yml
+│       └── disaster-recovery.yml
 │
 ├── argocd/
-│   ├── application.yaml
-│   └── project.yaml
+│
+├── disaster-recovery/
 │
 ├── docker/
 │
 ├── docs/
+│   ├── architecture.md
+│   ├── deployment.md
+│   ├── security.md
+│   ├── monitoring.md
+│   ├── disaster-recovery.md
+│   └── runbooks/
 │
 ├── helm/
 │   └── aha-ott/
-│       ├── Chart.yaml
-│       ├── values.yaml
-│       └── templates/
 │
 ├── kubernetes/
 │
@@ -913,12 +635,10 @@ aha-ott/
 │   ├── variables.tf
 │   ├── outputs.tf
 │   ├── providers.tf
-│   │
 │   ├── environments/
 │   │   ├── dev/
 │   │   ├── staging/
 │   │   └── prod/
-│   │
 │   └── modules/
 │       ├── eks/
 │       ├── iam/
@@ -939,84 +659,61 @@ aha-ott/
 
 ---
 
-# ⚙️ **Makefile Operations**
-
-Common DevOps operations can be simplified using the Makefile.
-
-### 📋 **View Operations**
+# ⚙️ **Common Operations**
 
 ```bash
+# Show available operations
 make help
-```
 
-### 🧹 **Terraform Formatting**
-
-```bash
+# Format Terraform
 make fmt
-```
 
-### ✅ **Validation**
-
-```bash
+# Validate configuration
 make validate
-```
 
-### 🔍 **Security / Quality Checks**
-
-```bash
+# Run quality and security checks
 make lint
-```
 
-### 📋 **Infrastructure Planning**
-
-```bash
+# Create infrastructure plan
 make plan
-```
 
-### 🚀 **Infrastructure Deployment**
-
-```bash
+# Apply infrastructure
 make apply
-```
 
-### 🚀 **Application Deployment**
-
-```bash
+# Deploy application
 make deploy
 ```
 
 ---
 
-# 🚀 **Deployment Workflow**
+# 🚀 **Deployment**
 
-## 1️⃣ Validate Infrastructure
+### 1. Initialize Terraform
+
+```bash
+terraform init
+```
+
+### 2. Validate Configuration
 
 ```bash
 terraform fmt -check -recursive
 terraform validate
 ```
 
-## 2️⃣ Initialize Terraform
-
-```bash
-terraform init
-```
-
-## 3️⃣ Review Infrastructure
+### 3. Review Changes
 
 ```bash
 terraform plan
 ```
 
-## 4️⃣ Provision AWS Infrastructure
+### 4. Provision Infrastructure
 
 ```bash
 terraform apply
 ```
 
-Terraform provisions the required AWS infrastructure.
-
-## 5️⃣ Configure EKS Access
+### 5. Configure EKS Access
 
 ```bash
 aws eks update-kubeconfig \
@@ -1024,23 +721,14 @@ aws eks update-kubeconfig \
   --name <EKS_CLUSTER_NAME>
 ```
 
-## 6️⃣ Verify Kubernetes
+### 6. Verify Cluster
 
 ```bash
 kubectl get nodes
 kubectl get pods -A
 ```
 
-## 7️⃣ Deploy Application
-
-Application deployment is managed through:
-
-* ☸️ Kubernetes
-* ⛵ Helm
-* 🔄 ArgoCD
-* 🚀 GitHub Actions
-
-## 8️⃣ Verify Application
+### 7. Verify Application
 
 ```bash
 kubectl get deployments
@@ -1048,324 +736,151 @@ kubectl get services
 kubectl get ingress
 ```
 
----
+Application delivery is managed through:
 
-# 🔐 **Complete DevSecOps Security Workflow**
-
-```text
-                    Developer
-                        |
-                        v
-                 GitHub Repository
-                        |
-                        v
-                 GitHub Actions
-                        |
-        +---------------+---------------+
-        |               |               |
-        v               v               v
-     Checkov          Trivy        CI Validation
-        |               |               |
-        +---------------+---------------+
-                        |
-                        v
-                  Security Gate
-                        |
-                        v
-                   Docker Build
-                        |
-                        v
-                   Image Scan
-                        |
-                        v
-                     Registry
-                        |
-                        v
-                     ArgoCD
-                        |
-                        v
-                   Amazon EKS
-                        |
-                        v
-                 OTT Application
-```
-
-This workflow implements security validation as part of the application delivery lifecycle.
+**GitHub Actions → Container Registry → ArgoCD → Amazon EKS**
 
 ---
 
-# 📊 **Complete Observability Workflow**
+# 📚 **Documentation**
+
+Detailed operational documentation is maintained under:
 
 ```text
-                  AWS Infrastructure
-                          |
-                          v
-                     Amazon EKS
-                          |
-             +------------+------------+
-             |                         |
-             v                         v
-      Kubernetes Metrics       Application Metrics
-             |                         |
-             +------------+------------+
-                          |
-                          v
-                     Prometheus
-                          |
-                          v
-                    Alertmanager
-                          |
-                          v
-                       Grafana
-                          |
-                          v
-                Operational Visibility
+docs/
+├── architecture.md
+├── deployment.md
+├── security.md
+├── monitoring.md
+├── disaster-recovery.md
+└── runbooks/
 ```
 
-Observability provides visibility into:
+Documentation covers:
 
-* ☸️ Kubernetes cluster health
-* 📦 Application workloads
-* 💻 Infrastructure performance
-* ❤️ Application health
-* 🚨 Alerts
-* 🔍 Troubleshooting
-* 📈 Operational metrics
+* Architecture
+* Deployment procedures
+* Security practices
+* Monitoring
+* Disaster recovery
+* Troubleshooting
+* Operational runbooks
 
 ---
 
 # 🎯 **Project Highlights**
 
-### ☁️ **Cloud Infrastructure**
+### ☁️ Cloud
 
 * AWS
 * Amazon VPC
 * Multi-AZ architecture
-* Public and private networking
 * Amazon EKS
 * IAM
-* AWS managed services
 
-### 🏗️ **Infrastructure Automation**
-
-* Terraform
-* Modular Infrastructure as Code
-* Environment separation
-* Automated validation
-* Version-controlled infrastructure
-* Repeatable deployments
-
-### ☸️ **Kubernetes Platform**
-
-* Amazon EKS
-* Kubernetes Deployments
-* Services
-* ConfigMaps
-* Secrets
-* Ingress
-* Containerized workloads
-
-### 🐳 **Container Platform**
-
-* Docker
-* Container images
-* Image scanning
-* Kubernetes integration
-* Automated build process
-
-### ⛵ **Application Delivery**
-
-* Helm
-* ArgoCD
-* GitOps
-* Declarative deployments
-* Continuous synchronization
-* Release management
-
-### 🚀 **CI/CD**
-
-* GitHub Actions
-* Continuous Integration
-* Continuous Delivery
-* Automated validation
-* Security gates
-* Deployment automation
-
-### 🔐 **Security**
-
-* Trivy
-* Checkov
-* IAM
-* Security policies
-* Container security
-* IaC security
-* Shift-left DevSecOps
-
-### 📊 **Monitoring**
-
-* Prometheus
-* Alertmanager
-* Grafana
-* Kubernetes monitoring
-* Infrastructure observability
-* Application monitoring
-
-### 📺 **OTT Platform**
-
-* Cloud-native OTT architecture
-* Containerized application services
-* Kubernetes-based deployment
-* Scalable application platform
-* Automated delivery
-* Production-oriented operations
-
----
-
-# 🏆 **What This Project Demonstrates**
-
-## ☁️ Cloud Engineering
-
-* AWS
-* VPC
-* Multi-AZ networking
-* Amazon EKS
-* IAM
-* Cloud infrastructure automation
-
-## 🏗️ Infrastructure Engineering
+### 🏗️ Infrastructure
 
 * Terraform
 * Modular IaC
 * Environment separation
-* Infrastructure lifecycle management
 * Automated provisioning
 
-## ☸️ Kubernetes Engineering
+### ☸️ Kubernetes
 
 * Amazon EKS
 * Kubernetes workloads
 * Services
 * Ingress
 * Configuration management
-* Container orchestration
 
-## 🐳 Container Engineering
+### 🐳 Containers
 
 * Docker
 * Container images
-* Security scanning
+* Image security scanning
 * Kubernetes integration
 
-## 🔄 GitOps Engineering
+### 🔄 GitOps
 
 * Helm
 * ArgoCD
-* Git-based deployments
-* Declarative infrastructure
+* Declarative deployments
 * Continuous synchronization
 
-## 🚀 DevOps Engineering
+### 🚀 CI/CD
 
 * GitHub Actions
-* CI/CD automation
-* Infrastructure validation
-* Automated application delivery
+* Automated validation
+* Docker builds
+* Security gates
+* Continuous delivery
 
-## 🔐 DevSecOps Engineering
+### 🔐 Security
 
 * Trivy
 * Checkov
-* Security gates
-* Container scanning
-* IaC scanning
-* Shift-left security
+* IAM
+* Security policies
+* Shift-left DevSecOps
 
-## 📊 Observability Engineering
+### 📊 Observability
 
 * Prometheus
 * Alertmanager
 * Grafana
-* Application monitoring
-* Infrastructure monitoring
-* Operational visibility
+* Kubernetes monitoring
+* Application observability
+
+### ♻️ Resilience
+
+* Multi-AZ architecture
+* Disaster recovery
+* Recovery automation
+* Business continuity practices
 
 ---
 
-# 🎯 **Project Objectives**
+# 🏆 **What This Project Demonstrates**
 
-The primary objective is to demonstrate how a modern OTT platform can be engineered using cloud-native DevOps practices.
+This project demonstrates practical DevOps and DevSecOps engineering across the complete application lifecycle:
 
 ```text
-                 Infrastructure as Code
-                          |
-                          v
-                    AWS Platform
-                          |
-                          v
-                    Multi-AZ VPC
-                          |
-                          v
-                     Amazon EKS
-                          |
-                          v
-                 Containerized OTT
-                    Application
-                          |
-                          v
+                    AWS Infrastructure
+                           |
+                           v
+                    Terraform IaC
+                           |
+                           v
+                      Amazon EKS
+                           |
+                           v
+                    Docker Workloads
+                           |
+                           v
                     Helm Packaging
-                          |
-                          v
-                    GitOps / ArgoCD
-                          |
-                          v
-                    DevSecOps CI/CD
-                          |
-                          v
-              Monitoring & Observability
-                          |
-                          v
-                 Production Readiness
+                           |
+                           v
+                      ArgoCD GitOps
+                           |
+                           v
+                 GitHub Actions CI/CD
+                           |
+                           v
+                   DevSecOps Security
+                           |
+                           v
+             Prometheus + Grafana
+                           |
+                           v
+                 Production Operations
+                           |
+                           v
+                Disaster Recovery
 ```
 
-The platform is designed to make OTT infrastructure and application delivery:
+The platform is designed around:
 
-* 🔁 Repeatable
-* 🧩 Maintainable
-* 🔐 Secure
-* 📈 Scalable
-* 🚀 Automated
-* 🌎 Highly Available
-* 📊 Observable
-* 🛡️ Security-focused
-* ⚙️ Operationally consistent
-
----
-
-# 🧠 **Key Engineering Practices**
-
-This project demonstrates practical implementation of:
-
-* ☁️ AWS cloud infrastructure
-* 🏗️ Terraform Infrastructure as Code
-* 🌐 Multi-AZ networking
-* ☸️ Amazon EKS
-* 🐳 Docker containerization
-* ⛵ Helm packaging
-* 🔄 ArgoCD GitOps
-* 🚀 GitHub Actions CI/CD
-* 🔐 DevSecOps security
-* 🔍 Trivy vulnerability scanning
-* 🛡️ Checkov IaC security validation
-* 📊 Prometheus monitoring
-* 📈 Grafana observability
-* 🚨 Alertmanager
-* 📺 OTT application delivery
-* 🧪 Automated validation
-* 🌎 Environment separation
-* 📚 Infrastructure documentation
-* ⚙️ Operational automation
-
-The architecture follows a **separation-of-concerns model**, keeping infrastructure provisioning, application deployment, security, monitoring, GitOps, testing, and operations logically separated while maintaining a unified delivery platform.
+**Automation • Security • Scalability • Availability • Observability • Reliability**
 
 ---
 
